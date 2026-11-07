@@ -48,10 +48,9 @@
   -webkit-font-feature-settings: 'liga';
   font-feature-settings: 'liga';
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-  /* مخفی تا زمان بارگذاری کامل فونت آیکون در جاوااسکریپت */
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.35s ease;
 }
 
 .icons-ready .material-symbols-rounded {
@@ -60,71 +59,64 @@
 }
 
 /* ==========================================================================
-   متغیرهای رنگ و گلس‌مورفیسم (حالت روشن پیش‌فرض + حالت تاریک خودکار)
+   متغیرهای رنگ و گلس‌مورفیسم (حالت روشن و تاریک خودکار)
    ========================================================================== */
 :root {
-  /* رنگ‌های پایه پس‌زمینه و حباب‌ها */
   --c-blue: #2433ff;
   --c-orange: #ff5b37;
   --c-purple: #8a3dff;
   --c-yellow: #ffd84d;
 
-  /* پالت حالت روشن */
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-calm: cubic-bezier(0.45, 0, 0.55, 1);
+
+  /* حالت روشن */
   --bg-base: #eef2ff;
-  --bg-secondary: #f8f9ff;
   --text-primary: #0c1029;
   --text-secondary: #37406b;
   --text-muted: #58628f;
 
-  /* مقادیر شیشه‌ای حالت روشن */
-  --glass-bg: rgba(255, 255, 255, 0.52);
-  --glass-bg-strong: rgba(255, 255, 255, 0.68);
-  --glass-card-bg: rgba(255, 255, 255, 0.46);
-  --glass-border: rgba(255, 255, 255, 0.78);
-  --glass-border-subtle: rgba(255, 255, 255, 0.55);
-  --glass-shadow: 0 24px 60px -12px rgba(20, 28, 82, 0.14), 0 8px 24px -6px rgba(20, 28, 82, 0.08);
-  --glass-inner: inset 0 1px 1px rgba(255, 255, 255, 0.92), inset 0 -1px 12px rgba(255, 255, 255, 0.35);
+  --glass-bg: rgba(255, 255, 255, 0.58);
+  --glass-bg-strong: rgba(255, 255, 255, 0.74);
+  --inner-card-bg: linear-gradient(155deg, rgba(255, 255, 255, 0.68) 0%, rgba(255, 255, 255, 0.42) 100%);
+  --inner-card-hover: linear-gradient(155deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.54) 100%);
+  --glass-border: rgba(255, 255, 255, 0.82);
+  --glass-border-subtle: rgba(255, 255, 255, 0.58);
+  --glass-shadow: 0 20px 50px -14px rgba(20, 28, 82, 0.13), 0 6px 20px -6px rgba(20, 28, 82, 0.07);
+  --glass-inner: inset 0 1px 1px rgba(255, 255, 255, 0.92), inset 0 -1px 10px rgba(255, 255, 255, 0.3);
 
-  /* تنظیمات تایپوگرافی هیرو در حالت روشن */
   --hero-back-color: #0e1333;
   --hero-front-stroke: #ffffff;
-  --hero-front-shadow: drop-shadow(0 8px 24px rgba(12, 16, 41, 0.55)) drop-shadow(0 0 3px rgba(12, 16, 41, 0.65));
-  --ring-text-color: rgba(14, 19, 51, 0.76);
-  --blob-opacity: 0.46;
-  --spotlight-color: rgba(255, 91, 55, 0.14);
-  --grid-line: rgba(36, 51, 255, 0.045);
-
-  /* متغیرهای پویا برای اسکرول، موس و پارالاکس */
-  --scroll-progress: 0;
-  --spot-x: 50vw;
-  --spot-y: 35vh;
-  --px: 0;
-  --py: 0;
+  --hero-front-shadow: 0 8px 26px rgba(12, 16, 41, 0.48);
+  --ring-text-color: rgba(14, 19, 51, 0.72);
+  --blob-opacity: 0.58;
+  --spotlight-fill: radial-gradient(circle, rgba(255, 91, 55, 0.15) 0%, rgba(36, 51, 255, 0.06) 45%, transparent 72%);
+  --grid-line: rgba(36, 51, 255, 0.04);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-base: #070916;
-    --bg-secondary: #0d1128;
     --text-primary: #f6f8ff;
     --text-secondary: #c5cdf2;
     --text-muted: #939ec9;
 
-    --glass-bg: rgba(18, 23, 50, 0.52);
-    --glass-bg-strong: rgba(22, 28, 62, 0.68);
-    --glass-card-bg: rgba(255, 255, 255, 0.06);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --glass-border-subtle: rgba(255, 255, 255, 0.12);
-    --glass-shadow: 0 28px 70px -12px rgba(0, 0, 0, 0.62), 0 10px 28px -8px rgba(4, 7, 22, 0.5);
-    --glass-inner: inset 0 1px 1px rgba(255, 255, 255, 0.28), inset 0 0 22px rgba(255, 255, 255, 0.05);
+    --glass-bg: rgba(17, 22, 48, 0.56);
+    --glass-bg-strong: rgba(22, 28, 62, 0.72);
+    --inner-card-bg: linear-gradient(155deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.035) 100%);
+    --inner-card-hover: linear-gradient(155deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.06) 100%);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --glass-border-subtle: rgba(255, 255, 255, 0.11);
+    --glass-shadow: 0 24px 60px -14px rgba(0, 0, 0, 0.58), 0 8px 24px -8px rgba(4, 7, 22, 0.45);
+    --glass-inner: inset 0 1px 1px rgba(255, 255, 255, 0.24), inset 0 0 18px rgba(255, 255, 255, 0.04);
 
     --hero-back-color: #ffffff;
     --hero-front-stroke: #ffffff;
-    --hero-front-shadow: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.68)) drop-shadow(0 0 16px rgba(255, 91, 55, 0.32));
-    --ring-text-color: rgba(246, 248, 255, 0.82);
-    --blob-opacity: 0.52;
-    --spotlight-color: rgba(138, 61, 255, 0.2);
-    --grid-line: rgba(255, 255, 255, 0.035);
+    --hero-front-shadow: 0 10px 28px rgba(0, 0, 0, 0.65);
+    --ring-text-color: rgba(246, 248, 255, 0.78);
+    --blob-opacity: 0.62;
+    --spotlight-fill: radial-gradient(circle, rgba(138, 61, 255, 0.2) 0%, rgba(255, 91, 55, 0.07) 45%, transparent 72%);
+    --grid-line: rgba(255, 255, 255, 0.03);
   }
 }
 
@@ -150,12 +142,13 @@ body {
   font-weight: 400;
   background-color: var(--bg-base);
   color: var(--text-primary);
-  line-height: 1.75;
+  line-height: 1.78;
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: clip;
   position: relative;
   padding-bottom: env(safe-area-inset-bottom, 0px);
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -172,7 +165,6 @@ img {
   display: block;
 }
 
-/* فوکوس کیبورد کاملاً قابل‌مشاهده */
 :focus-visible {
   outline: 3px solid var(--c-orange);
   outline-offset: 4px;
@@ -185,42 +177,45 @@ img {
 }
 
 /* ==========================================================================
-   نوار رنگی پیشرفت اسکرول و نور دنبال‌کننده موس
+   نوار پیشرفت اسکرول و نور دنبال‌کننده موس (کاملاً مبتنی بر GPU بدون Repaint)
    ========================================================================== */
 .scroll-progress {
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  height: 4px;
+  height: 3.5px;
   z-index: 120;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
   pointer-events: none;
 }
 
 .scroll-progress__bar {
+  --scroll-progress: 0;
   width: 100%;
   height: 100%;
   transform-origin: right center;
-  transform: scaleX(var(--scroll-progress));
+  transform: scale3d(var(--scroll-progress), 1, 1);
   background: linear-gradient(90deg, var(--c-yellow), var(--c-orange), var(--c-purple), var(--c-blue));
-  box-shadow: 0 0 16px rgba(255, 91, 55, 0.75);
-  transition: transform 0.08s linear;
+  will-change: transform;
 }
 
 .cursor-spotlight {
+  --spot-x: -999px;
+  --spot-y: -999px;
   position: fixed;
-  inset: 0;
+  top: -280px;
+  left: -280px;
+  width: 560px;
+  height: 560px;
+  border-radius: 50%;
   z-index: 1;
   pointer-events: none;
   opacity: 0;
-  background: radial-gradient(
-    560px circle at var(--spot-x) var(--spot-y),
-    var(--spotlight-color),
-    rgba(36, 51, 255, 0.06) 42%,
-    transparent 72%
-  );
-  transition: opacity 0.4s ease;
+  background: var(--spotlight-fill);
+  transform: translate3d(var(--spot-x), var(--spot-y), 0);
+  transition: opacity 0.6s ease;
+  will-change: transform, opacity;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -230,7 +225,7 @@ img {
 }
 
 /* ==========================================================================
-   پس‌زمینه ۴ حباب رنگی متحرک و تغییرشکل‌دهنده
+   پس‌زمینه ۴ حباب رنگی بسیار نرم و روان (بدون فیلتر سنگین و بدون لگ)
    ========================================================================== */
 .ambient-bg {
   position: fixed;
@@ -238,54 +233,79 @@ img {
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
+  contain: strict;
 }
 
 .ambient-blob {
   position: absolute;
-  border-radius: 44% 56% 64% 36% / 42% 48% 52% 58%;
-  filter: blur(88px);
+  border-radius: 50%;
   opacity: var(--blob-opacity);
-  will-change: transform, border-radius;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 /* آبی کبالتی #2433ff */
 .blob-blue {
-  width: clamp(300px, 44vw, 620px);
-  height: clamp(300px, 44vw, 620px);
-  background: #2433ff;
-  top: -10%;
-  right: -8%;
-  animation: blobOrbitOne 22s ease-in-out infinite alternate;
+  width: clamp(380px, 56vw, 780px);
+  height: clamp(380px, 56vw, 780px);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #2433ff 0%,
+    rgba(36, 51, 255, 0.52) 38%,
+    rgba(36, 51, 255, 0.14) 68%,
+    rgba(36, 51, 255, 0) 100%
+  );
+  top: -18%;
+  right: -14%;
+  animation: blobCalmOne 38s var(--ease-in-out-calm) infinite alternate;
 }
 
 /* نارنجی مرجانی #ff5b37 */
 .blob-orange {
-  width: clamp(280px, 40vw, 560px);
-  height: clamp(280px, 40vw, 560px);
-  background: #ff5b37;
-  top: 18%;
-  left: -10%;
-  animation: blobOrbitTwo 25s ease-in-out infinite alternate;
+  width: clamp(360px, 52vw, 720px);
+  height: clamp(360px, 52vw, 720px);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #ff5b37 0%,
+    rgba(255, 91, 55, 0.5) 38%,
+    rgba(255, 91, 55, 0.14) 68%,
+    rgba(255, 91, 55, 0) 100%
+  );
+  top: 14%;
+  left: -16%;
+  animation: blobCalmTwo 44s var(--ease-in-out-calm) infinite alternate;
 }
 
 /* بنفش #8a3dff */
 .blob-purple {
-  width: clamp(320px, 46vw, 640px);
-  height: clamp(320px, 46vw, 640px);
-  background: #8a3dff;
-  bottom: -14%;
-  right: 14%;
-  animation: blobOrbitThree 28s ease-in-out infinite alternate;
+  width: clamp(400px, 58vw, 800px);
+  height: clamp(400px, 58vw, 800px);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #8a3dff 0%,
+    rgba(138, 61, 255, 0.5) 38%,
+    rgba(138, 61, 255, 0.14) 68%,
+    rgba(138, 61, 255, 0) 100%
+  );
+  bottom: -20%;
+  right: 8%;
+  animation: blobCalmThree 48s var(--ease-in-out-calm) infinite alternate;
 }
 
 /* زرد کره‌ای #ffd84d */
 .blob-yellow {
-  width: clamp(240px, 34vw, 480px);
-  height: clamp(240px, 34vw, 480px);
-  background: #ffd84d;
-  bottom: 8%;
-  left: 16%;
-  animation: blobOrbitFour 20s ease-in-out infinite alternate;
+  width: clamp(320px, 46vw, 640px);
+  height: clamp(320px, 46vw, 640px);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #ffd84d 0%,
+    rgba(255, 216, 77, 0.46) 38%,
+    rgba(255, 216, 77, 0.12) 68%,
+    rgba(255, 216, 77, 0) 100%
+  );
+  bottom: 4%;
+  left: 10%;
+  animation: blobCalmFour 36s var(--ease-in-out-calm) infinite alternate;
 }
 
 .ambient-grid {
@@ -294,69 +314,78 @@ img {
   background-image:
     linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
     linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.7) 25%, transparent 85%);
-  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.7) 25%, transparent 85%);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.65) 20%, transparent 82%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.65) 20%, transparent 82%);
 }
 
-@keyframes blobOrbitOne {
+/* تغییر شکل بیضوی، بزرگ و کوچک شدن و حرکت آرام فقط با transform روی GPU */
+@keyframes blobCalmOne {
   0% {
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-    border-radius: 42% 58% 66% 34% / 44% 45% 55% 56%;
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotate(0deg);
   }
   50% {
-    transform: translate3d(-8vw, 10vh, 0) scale(1.22) rotate(28deg);
-    border-radius: 64% 36% 42% 58% / 58% 62% 38% 42%;
+    transform: translate3d(-6vw, 7vh, 0) scale3d(1.18, 0.88, 1) rotate(18deg);
   }
   100% {
-    transform: translate3d(-14vw, 4vh, 0) scale(0.9) rotate(-18deg);
-    border-radius: 36% 64% 55% 45% / 48% 34% 66% 52%;
-  }
-}
-
-@keyframes blobOrbitTwo {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-    border-radius: 58% 42% 48% 52% / 50% 60% 40% 50%;
-  }
-  50% {
-    transform: translate3d(12vw, 8vh, 0) scale(1.26) rotate(-32deg);
-    border-radius: 38% 62% 64% 36% / 42% 38% 62% 58%;
-  }
-  100% {
-    transform: translate3d(6vw, -9vh, 0) scale(0.88) rotate(22deg);
-    border-radius: 66% 34% 39% 61% / 61% 46% 54% 39%;
+    transform: translate3d(-11vw, 3vh, 0) scale3d(0.9, 1.14, 1) rotate(-14deg);
   }
 }
 
-@keyframes blobOrbitThree {
+@keyframes blobCalmTwo {
   0% {
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-    border-radius: 48% 52% 62% 38% / 56% 42% 58% 44%;
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotate(0deg);
   }
   50% {
-    transform: translate3d(-10vw, -12vh, 0) scale(1.18) rotate(24deg);
-    border-radius: 66% 34% 48% 52% / 38% 64% 36% 62%;
+    transform: translate3d(9vw, 6vh, 0) scale3d(0.88, 1.2, 1) rotate(-20deg);
   }
   100% {
-    transform: translate3d(8vw, -6vh, 0) scale(0.92) rotate(-25deg);
-    border-radius: 35% 65% 58% 42% / 62% 38% 62% 38%;
+    transform: translate3d(5vw, -7vh, 0) scale3d(1.14, 0.9, 1) rotate(15deg);
   }
 }
 
-@keyframes blobOrbitFour {
+@keyframes blobCalmThree {
   0% {
-    transform: translate3d(0, 0, 0) scale(0.95) rotate(0deg);
-    border-radius: 52% 48% 37% 63% / 46% 58% 42% 54%;
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotate(0deg);
   }
   50% {
-    transform: translate3d(9vw, -11vh, 0) scale(1.25) rotate(-26deg);
-    border-radius: 36% 64% 62% 38% / 64% 40% 60% 36%;
+    transform: translate3d(-8vw, -8vh, 0) scale3d(1.16, 0.9, 1) rotate(16deg);
   }
   100% {
-    transform: translate3d(-7vw, 6vh, 0) scale(0.9) rotate(20deg);
-    border-radius: 63% 37% 45% 55% / 40% 63% 37% 60%;
+    transform: translate3d(6vw, -4vh, 0) scale3d(0.92, 1.15, 1) rotate(-18deg);
   }
+}
+
+@keyframes blobCalmFour {
+  0% {
+    transform: translate3d(0, 0, 0) scale3d(0.96, 1.04, 1) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(7vw, -8vh, 0) scale3d(1.18, 0.88, 1) rotate(-16deg);
+  }
+  100% {
+    transform: translate3d(-5vw, 5vh, 0) scale3d(0.92, 1.12, 1) rotate(14deg);
+  }
+}
+
+/* ==========================================================================
+   انیمیشن ورود تدریجی هنگام اسکرول (بدون ایجاد تأخیر در هاور کارت‌ها)
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition:
+    opacity 0.9s var(--ease-out-soft),
+    transform 0.9s var(--ease-out-soft);
+}
+
+.reveal:not(.reveal-done) {
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
 /* ==========================================================================
@@ -370,71 +399,77 @@ img {
 .btn-glass,
 .location-line {
   background: var(--glass-bg);
-  -webkit-backdrop-filter: blur(22px) saturate(180%);
-  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(165%);
+  backdrop-filter: blur(16px) saturate(165%);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow), var(--glass-inner);
 }
 
 .glass-card {
-  background: var(--glass-card-bg);
   border-radius: 28px;
 }
 
-/* گرادیان‌های نارنجی، بنفش و آبی برای آیکون‌ها */
+/* کارت‌های شیشه‌ای داخلی (بدون تکرار تو در توی backdrop-filter برای اسکرول ابریشمی) */
+.inner-glass-card {
+  background: var(--inner-card-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-inner), 0 14px 34px -12px rgba(10, 14, 40, 0.16);
+  border-radius: 28px;
+}
+
 .icon-grad-orange {
   background: linear-gradient(135deg, #ff5b37 0%, #ff9344 55%, #ffd84d 100%);
-  box-shadow: 0 12px 28px -6px rgba(255, 91, 55, 0.55), inset 0 1px 2px rgba(255, 255, 255, 0.65);
+  box-shadow: 0 10px 24px -6px rgba(255, 91, 55, 0.48), inset 0 1px 2px rgba(255, 255, 255, 0.65);
 }
 
 .icon-grad-blue {
   background: linear-gradient(135deg, #2433ff 0%, #5664ff 55%, #8a3dff 100%);
-  box-shadow: 0 12px 28px -6px rgba(36, 51, 255, 0.55), inset 0 1px 2px rgba(255, 255, 255, 0.65);
+  box-shadow: 0 10px 24px -6px rgba(36, 51, 255, 0.48), inset 0 1px 2px rgba(255, 255, 255, 0.65);
 }
 
 .icon-grad-purple {
   background: linear-gradient(135deg, #8a3dff 0%, #5b38ff 52%, #ff5b37 100%);
-  box-shadow: 0 12px 28px -6px rgba(138, 61, 255, 0.55), inset 0 1px 2px rgba(255, 255, 255, 0.65);
+  box-shadow: 0 10px 24px -6px rgba(138, 61, 255, 0.48), inset 0 1px 2px rgba(255, 255, 255, 0.65);
 }
 
 .icon-grad-coral-purple {
   background: linear-gradient(135deg, #ff5b37 0%, #8a3dff 60%, #2433ff 100%);
-  box-shadow: 0 12px 28px -6px rgba(138, 61, 255, 0.52), inset 0 1px 2px rgba(255, 255, 255, 0.65);
+  box-shadow: 0 10px 24px -6px rgba(138, 61, 255, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.65);
 }
 
 .icon-orb {
-  width: 68px;
-  height: 68px;
+  width: 66px;
+  height: 66px;
   border-radius: 22px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
   position: relative;
-  animation: iconFloat 4.8s ease-in-out infinite;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-radius 0.4s ease;
+  animation: iconFloatCalm 6.8s var(--ease-in-out-calm) infinite;
+  transition: transform 0.5s var(--ease-out-soft), border-radius 0.5s var(--ease-out-soft);
 }
 
 .icon-orb .material-symbols-rounded {
-  font-size: 32px;
+  font-size: 31px;
 }
 
 .icon-orb--lg {
-  width: 78px;
-  height: 78px;
-  border-radius: 26px;
+  width: 76px;
+  height: 76px;
+  border-radius: 25px;
 }
 
 .icon-orb--lg .material-symbols-rounded {
-  font-size: 38px;
+  font-size: 36px;
 }
 
-@keyframes iconFloat {
+@keyframes iconFloatCalm {
   0%, 100% {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translateY(-7px);
+    transform: translate3d(0, -5px, 0);
   }
 }
 
@@ -455,7 +490,7 @@ img {
   pointer-events: auto;
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0.65rem 0.9rem 0.65rem 0.75rem;
+  padding: 0.6rem 0.85rem 0.6rem 0.7rem;
   border-radius: 999px;
   display: flex;
   align-items: center;
@@ -469,28 +504,28 @@ img {
   align-items: center;
   gap: 0.6rem;
   font-weight: 900;
-  font-size: 1rem;
+  font-size: 0.98rem;
   padding-inline: 0.5rem;
   white-space: nowrap;
 }
 
 .nav-brand__dot {
-  width: 11px;
-  height: 11px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--c-orange), var(--c-yellow));
-  box-shadow: 0 0 12px var(--c-orange);
-  animation: dotPulse 2.2s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(255, 91, 55, 0.7);
+  animation: dotBreathe 3.4s var(--ease-in-out-calm) infinite;
 }
 
-@keyframes dotPulse {
+@keyframes dotBreathe {
   0%, 100% {
-    transform: scale(1);
-    opacity: 1;
+    transform: scale3d(1, 1, 1);
+    opacity: 0.9;
   }
   50% {
-    transform: scale(1.35);
-    opacity: 0.75;
+    transform: scale3d(1.22, 1.22, 1);
+    opacity: 1;
   }
 }
 
@@ -504,29 +539,29 @@ img {
   font-weight: 600;
   font-size: 0.92rem;
   color: var(--text-secondary);
-  padding: 0.45rem 0.95rem;
+  padding: 0.44rem 0.95rem;
   border-radius: 999px;
-  transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .nav-link:hover,
 .nav-link.is-active {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .nav-cta {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.52rem 1.1rem;
+  padding: 0.5rem 1.1rem;
   border-radius: 999px;
   font-weight: 600;
   font-size: 0.9rem;
   color: #ffffff;
   background: linear-gradient(135deg, var(--c-orange), var(--c-purple));
-  box-shadow: 0 10px 24px -6px rgba(255, 91, 55, 0.55);
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px -6px rgba(255, 91, 55, 0.5);
+  transition: transform 0.4s var(--ease-out-soft), opacity 0.3s ease;
   white-space: nowrap;
 }
 
@@ -535,12 +570,11 @@ img {
 }
 
 .nav-cta:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 14px 30px -6px rgba(255, 91, 55, 0.75);
+  transform: translate3d(0, -2px, 0);
 }
 
 /* ==========================================================================
-   بخش اول: هیرو سوپر گرافیکی با پارالاکس چندلایه
+   بخش اول: هیرو با پارالاکس نرم و بدون لرزش
    ========================================================================== */
 main {
   position: relative;
@@ -550,29 +584,29 @@ main {
 .hero {
   min-height: 100vh;
   min-height: 100dvh;
-  padding: calc(6.4rem + env(safe-area-inset-top, 0px)) 1.25rem 3.5rem;
+  padding: calc(6.2rem + env(safe-area-inset-top, 0px)) 1.25rem 3.2rem;
   max-width: 1240px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.8rem;
+  gap: 1.75rem;
 }
 
 .hero-stage {
+  --px: 0;
+  --py: 0;
   position: relative;
   isolation: isolate;
   width: 100%;
   max-width: 1060px;
-  height: clamp(410px, 60vw, 590px);
+  height: clamp(400px, 58vw, 580px);
   display: flex;
   align-items: center;
   justify-content: center;
-  touch-action: pan-y;
 }
 
-/* بدون ایجاد Stacking Context تا لایه‌های نام پشت و جلوی عکس قرار بگیرند */
 .hero-heading {
   position: static;
   margin: 0;
@@ -580,35 +614,36 @@ main {
 
 .hero-name {
   position: absolute;
-  left: 50%;
+  inset-inline: 0;
+  display: flex;
+  justify-content: center;
   font-weight: 900;
   line-height: 1.08;
   white-space: nowrap;
   user-select: none;
   pointer-events: none;
   will-change: transform;
-  transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ورود اسم از بالا به پایین با clip-path */
+/* ورود نرم اسم از بالا به پایین با clip-path */
 .hero-name__clip {
   display: inline-block;
   padding: 0.14em 0.1em;
   clip-path: inset(-18% -10% 118% -10%);
-  animation: clipRevealTopDown 1.15s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation: clipRevealTopDown 1.35s var(--ease-out-soft) forwards;
 }
 
-/* لایه عقب: نام «محمدرضا» بسیار بزرگ در پشت قاب عکس */
+/* لایه عقب: نام «محمدرضا» پشت عکس */
 .hero-name--back {
   top: 7%;
   z-index: 1;
-  font-size: clamp(4.3rem, 15.6vw, 12.8rem);
+  font-size: clamp(3.9rem, 15vw, 12.2rem);
   color: var(--hero-back-color);
   letter-spacing: -0.02em;
-  text-shadow: 0 18px 48px rgba(36, 51, 255, 0.2);
+  text-shadow: 0 14px 40px rgba(36, 51, 255, 0.18);
   transform: translate3d(
-    calc(-50% + (var(--px) * -28px)),
-    calc(var(--py) * -18px),
+    calc(var(--px) * -15px),
+    calc(var(--py) * -10px),
     0
   );
 }
@@ -617,62 +652,63 @@ main {
   animation-delay: 0.12s;
 }
 
-/* لایه جلو: نام خانوادگی «محمدی» با خط‌دور و بدون پرکردگی روی عکس */
+/* لایه جلو: نام خانوادگی «محمدی» با خط‌دور جلوی عکس */
 .hero-name--front {
   bottom: 4%;
   z-index: 4;
-  font-size: clamp(3.9rem, 13.8vw, 11.2rem);
+  font-size: clamp(3.5rem, 13.4vw, 10.8rem);
   color: transparent;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 2.6px var(--hero-front-stroke);
+  -webkit-text-stroke: 2.4px var(--hero-front-stroke);
   paint-order: stroke fill;
-  filter: var(--hero-front-shadow);
+  text-shadow: var(--hero-front-shadow);
   letter-spacing: -0.015em;
   transform: translate3d(
-    calc(-50% + (var(--px) * 34px)),
-    calc(var(--py) * 22px),
+    calc(var(--px) * 18px),
+    calc(var(--py) * 12px),
     0
   );
 }
 
 .hero-name--front .hero-name__clip {
-  animation-delay: 0.34s;
+  animation-delay: 0.32s;
 }
 
 @keyframes clipRevealTopDown {
   0% {
     clip-path: inset(-18% -10% 118% -10%);
-    transform: translateY(-22px);
+    transform: translate3d(0, -16px, 0);
   }
   100% {
     clip-path: inset(-18% -10% -18% -10%);
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
-/* حلقه متن چرخان SVG دور عکس */
+/* حلقه متن چرخان SVG دور عکس با چرخش بسیار آرام */
 .hero-ring-layer {
   position: absolute;
   z-index: 2;
-  width: clamp(315px, 50vw, 535px);
-  height: clamp(315px, 50vw, 535px);
+  width: clamp(305px, 49vw, 525px);
+  height: clamp(305px, 49vw, 525px);
   pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
   transform: translate3d(
-    calc(var(--px) * -16px),
-    calc(var(--py) * -14px),
+    calc(var(--px) * -10px),
+    calc(var(--py) * -8px),
     0
   );
-  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 .hero-ring-svg {
   width: 100%;
   height: 100%;
   overflow: visible;
-  animation: spinOrbit 30s linear infinite;
+  animation: spinOrbitCalm 48s linear infinite;
+  will-change: transform;
 }
 
 .hero-ring-text {
@@ -684,7 +720,7 @@ main {
   text-transform: uppercase;
 }
 
-@keyframes spinOrbit {
+@keyframes spinOrbitCalm {
   from {
     transform: rotate(0deg);
   }
@@ -693,43 +729,43 @@ main {
   }
 }
 
-/* قاب طاقی شیشه‌ای عکس همراه با هاله نور نارنجی */
+/* قاب طاقی شیشه‌ای عکس با هاله نور نارنجی نرم */
 .hero-arch-layer {
   position: relative;
   z-index: 3;
-  width: clamp(232px, 32vw, 352px);
+  width: clamp(226px, 31vw, 344px);
   aspect-ratio: 3 / 4;
   transform: translate3d(
-    calc(var(--px) * 14px),
-    calc(var(--py) * 12px),
+    calc(var(--px) * 9px),
+    calc(var(--py) * 7px),
     0
   );
-  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 .hero-arch-glow {
   position: absolute;
-  inset: -16px;
-  border-radius: 999px 999px 48px 48px;
+  inset: -34px;
+  border-radius: 999px 999px 64px 64px;
   background: radial-gradient(
-    circle at 50% 42%,
-    rgba(255, 91, 55, 0.72),
-    rgba(255, 216, 77, 0.32) 48%,
-    transparent 74%
+    50% 50% at 50% 45%,
+    rgba(255, 91, 55, 0.58) 0%,
+    rgba(255, 216, 77, 0.24) 46%,
+    rgba(255, 91, 55, 0) 76%
   );
-  filter: blur(26px);
   z-index: -1;
-  animation: archGlowPulse 4.5s ease-in-out infinite alternate;
+  animation: archGlowCalm 6.5s var(--ease-in-out-calm) infinite alternate;
+  will-change: transform, opacity;
 }
 
-@keyframes archGlowPulse {
+@keyframes archGlowCalm {
   0% {
     opacity: 0.72;
-    transform: scale(0.96);
+    transform: scale3d(0.96, 0.96, 1);
   }
   100% {
     opacity: 1;
-    transform: scale(1.06);
+    transform: scale3d(1.05, 1.05, 1);
   }
 }
 
@@ -740,28 +776,28 @@ main {
   border-radius: 999px 999px 38px 38px;
   background: linear-gradient(
     160deg,
-    rgba(255, 255, 255, 0.58) 0%,
-    rgba(255, 91, 55, 0.28) 52%,
-    rgba(255, 255, 255, 0.2) 100%
+    rgba(255, 255, 255, 0.56) 0%,
+    rgba(255, 91, 55, 0.26) 52%,
+    rgba(255, 255, 255, 0.18) 100%
   );
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
-  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(165%);
+  backdrop-filter: blur(14px) saturate(165%);
   border: 1.5px solid rgba(255, 255, 255, 0.65);
   box-shadow:
-    0 28px 65px -12px rgba(10, 12, 34, 0.45),
-    0 0 38px rgba(255, 91, 55, 0.42),
-    inset 0 2px 3px rgba(255, 255, 255, 0.85);
-  animation: archRiseUp 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+    0 24px 56px -12px rgba(10, 12, 34, 0.42),
+    0 0 32px rgba(255, 91, 55, 0.34),
+    inset 0 2px 3px rgba(255, 255, 255, 0.82);
+  animation: archRiseSoft 1.25s var(--ease-out-soft) both;
 }
 
-@keyframes archRiseUp {
+@keyframes archRiseSoft {
   0% {
     opacity: 0;
-    transform: translateY(56px) scale(0.92);
+    transform: translate3d(0, 38px, 0) scale3d(0.95, 0.95, 1);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
   }
 }
 
@@ -779,16 +815,16 @@ main {
   height: 100%;
   object-fit: cover;
   object-position: 50% 18%;
-  animation: slowPhotoZoom 14s ease-in-out infinite alternate;
+  animation: slowPhotoZoomCalm 22s var(--ease-in-out-calm) infinite alternate;
   will-change: transform;
 }
 
-@keyframes slowPhotoZoom {
+@keyframes slowPhotoZoomCalm {
   0% {
-    transform: scale(1);
+    transform: scale3d(1, 1, 1);
   }
   100% {
-    transform: scale(1.1);
+    transform: scale3d(1.065, 1.065, 1);
   }
 }
 
@@ -797,27 +833,61 @@ main {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.12) 0%,
     transparent 35%,
-    rgba(8, 10, 24, 0.48) 100%
+    rgba(8, 10, 24, 0.46) 100%
   );
   pointer-events: none;
 }
 
-/* سه برچسب شیشه‌ای شناور با عمق‌های پارالاکس متفاوت */
-.hero-badge {
+/* سه برچسب شیشه‌ای شناور با جداسازی کامل پارالاکس و شناوری */
+.hero-badge-wrap {
   position: absolute;
   z-index: 5;
+  will-change: transform;
+}
+
+.hero-badge-wrap--one {
+  top: 22%;
+  right: 8%;
+  transform: translate3d(
+    calc(var(--px) * 20px),
+    calc(var(--py) * 14px),
+    0
+  );
+}
+
+.hero-badge-wrap--two {
+  top: 46%;
+  left: 7%;
+  transform: translate3d(
+    calc(var(--px) * -20px),
+    calc(var(--py) * 15px),
+    0
+  );
+}
+
+.hero-badge-wrap--three {
+  bottom: 22%;
+  right: 10%;
+  transform: translate3d(
+    calc(var(--px) * 17px),
+    calc(var(--py) * -13px),
+    0
+  );
+}
+
+.hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.52rem 1rem 0.52rem 0.62rem;
+  padding: 0.5rem 1rem 0.5rem 0.6rem;
   border-radius: 999px;
   font-weight: 600;
   font-size: 0.92rem;
   white-space: nowrap;
-  will-change: transform, translate;
-  transition: translate 0.2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease;
+  will-change: transform;
+  transition: background-color 0.35s ease;
 }
 
 .hero-badge:hover {
@@ -825,7 +895,19 @@ main {
 }
 
 .hero-badge:hover .badge-icon {
-  transform: scale(1.12) rotate(8deg);
+  transform: scale3d(1.08, 1.08, 1);
+}
+
+.hero-badge--one {
+  animation: badgeFloatCalmOne 7.2s var(--ease-in-out-calm) infinite;
+}
+
+.hero-badge--two {
+  animation: badgeFloatCalmTwo 8s var(--ease-in-out-calm) infinite -2.2s;
+}
+
+.hero-badge--three {
+  animation: badgeFloatCalmThree 7.6s var(--ease-in-out-calm) infinite -4.1s;
 }
 
 .badge-icon {
@@ -836,58 +918,37 @@ main {
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.4s var(--ease-out-soft);
 }
 
 .badge-icon .material-symbols-rounded {
   font-size: 20px;
 }
 
-.hero-badge--one {
-  top: 22%;
-  right: 8%;
-  translate: calc(var(--px) * 44px) calc(var(--py) * 28px);
-  animation: badgeFloatOne 5.2s ease-in-out infinite;
-}
-
-.hero-badge--two {
-  top: 45%;
-  left: 7%;
-  translate: calc(var(--px) * -42px) calc(var(--py) * 32px);
-  animation: badgeFloatTwo 5.8s ease-in-out infinite -1.6s;
-}
-
-.hero-badge--three {
-  bottom: 22%;
-  right: 10%;
-  translate: calc(var(--px) * 36px) calc(var(--py) * -26px);
-  animation: badgeFloatThree 6.2s ease-in-out infinite -3.1s;
-}
-
-@keyframes badgeFloatOne {
+@keyframes badgeFloatCalmOne {
   0%, 100% {
     transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translate3d(0, -13px, 0);
+    transform: translate3d(0, -7px, 0);
   }
 }
 
-@keyframes badgeFloatTwo {
+@keyframes badgeFloatCalmTwo {
   0%, 100% {
     transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translate3d(0, 14px, 0);
+    transform: translate3d(0, 8px, 0);
   }
 }
 
-@keyframes badgeFloatThree {
+@keyframes badgeFloatCalmThree {
   0%, 100% {
     transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translate3d(0, -11px, 0);
+    transform: translate3d(0, -6px, 0);
   }
 }
 
@@ -902,7 +963,7 @@ main {
 }
 
 .hero-role {
-  font-size: clamp(1rem, 2.2vw, 1.22rem);
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
   font-weight: 600;
   color: var(--text-secondary);
   display: flex;
@@ -924,9 +985,10 @@ main {
   gap: 0.95rem;
 }
 
-/* دکمه اصلی با درخشش پالسی */
+/* دکمه اصلی با درخشش پالسی مبتنی بر GPU بدون Repaint */
 .btn-primary {
   position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -937,34 +999,37 @@ main {
   font-size: 1rem;
   color: #ffffff;
   background: linear-gradient(135deg, var(--c-orange) 0%, var(--c-purple) 55%, var(--c-blue) 100%);
-  background-size: 200% 200%;
   border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 16px 38px -8px rgba(255, 91, 55, 0.62), inset 0 1px 2px rgba(255, 255, 255, 0.65);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, background-position 0.5s ease;
+  box-shadow: 0 14px 32px -8px rgba(255, 91, 55, 0.52), inset 0 1px 2px rgba(255, 255, 255, 0.65);
+  transition: transform 0.45s var(--ease-out-soft);
 }
 
 .btn-primary:hover {
-  transform: translateY(-4px) scale(1.03);
-  background-position: 100% 50%;
-  box-shadow: 0 22px 46px -8px rgba(138, 61, 255, 0.72), inset 0 1px 3px rgba(255, 255, 255, 0.8);
+  transform: translate3d(0, -3px, 0) scale3d(1.02, 1.02, 1);
 }
 
-.btn-pulse {
-  animation: buttonPulseGlow 2.8s ease-in-out infinite;
+.btn-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 999px;
+  z-index: -1;
+  background: linear-gradient(135deg, rgba(255, 91, 55, 0.55), rgba(138, 61, 255, 0.55));
+  filter: blur(14px);
+  opacity: 0.55;
+  animation: pulseAuraCalm 3.8s var(--ease-in-out-calm) infinite;
+  pointer-events: none;
+  will-change: transform, opacity;
 }
 
-@keyframes buttonPulseGlow {
+@keyframes pulseAuraCalm {
   0%, 100% {
-    box-shadow:
-      0 14px 34px -8px rgba(255, 91, 55, 0.58),
-      0 0 0 0 rgba(255, 91, 55, 0.45),
-      inset 0 1px 2px rgba(255, 255, 255, 0.65);
+    opacity: 0.42;
+    transform: scale3d(0.96, 0.96, 1);
   }
   50% {
-    box-shadow:
-      0 18px 44px -4px rgba(138, 61, 255, 0.75),
-      0 0 0 12px rgba(255, 91, 55, 0),
-      inset 0 1px 2px rgba(255, 255, 255, 0.8);
+    opacity: 0.85;
+    transform: scale3d(1.06, 1.12, 1);
   }
 }
 
@@ -978,15 +1043,14 @@ main {
   font-weight: 600;
   font-size: 1rem;
   color: var(--text-primary);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease;
+  transition: transform 0.45s var(--ease-out-soft), background-color 0.35s ease;
 }
 
 .btn-glass:hover {
-  transform: translateY(-4px);
+  transform: translate3d(0, -3px, 0);
   background: var(--glass-bg-strong);
 }
 
-/* راهنمای اسکرول پایین هیرو */
 .scroll-cue {
   margin-top: 0.35rem;
   display: inline-flex;
@@ -1011,27 +1075,27 @@ main {
   align-items: center;
   justify-content: center;
   background: var(--glass-bg);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
-  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  backdrop-filter: blur(12px) saturate(150%);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-inner);
-  animation: cueBounce 2.1s ease-in-out infinite;
+  animation: cueFloatCalm 3.2s var(--ease-in-out-calm) infinite;
 }
 
-@keyframes cueBounce {
+@keyframes cueFloatCalm {
   0%, 100% {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translateY(7px);
+    transform: translate3d(0, 5px, 0);
   }
 }
 
 /* ==========================================================================
-   بخش ۱: نوار متحرک مایل زرد (Marquee)
+   بخش ۱: نوار متحرک مایل زرد با حرکت آرام و یکنواخت
    ========================================================================== */
 .marquee-section {
-  padding: 2.6rem 0 3.4rem;
+  padding: 2.4rem 0 3.2rem;
   overflow: hidden;
   position: relative;
 }
@@ -1042,17 +1106,17 @@ main {
   margin-left: -4%;
   background: linear-gradient(90deg, #ffd84d 0%, #ffe47a 50%, #ffd84d 100%);
   color: #0b0e22;
-  padding: 1.05rem 0;
-  transform: rotate(-2.4deg);
+  padding: 1.02rem 0;
+  transform: rotate(-2.2deg);
   border-top: 2px solid rgba(255, 255, 255, 0.78);
   border-bottom: 2px solid rgba(255, 255, 255, 0.78);
-  box-shadow: 0 22px 48px -12px rgba(255, 216, 77, 0.38);
+  box-shadow: 0 18px 42px -12px rgba(255, 216, 77, 0.34);
 }
 
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marqueeInfinite 24s linear infinite;
+  animation: marqueeSmooth 38s linear infinite;
   will-change: transform;
 }
 
@@ -1062,7 +1126,7 @@ main {
   gap: 1.6rem;
   padding-inline-end: 1.6rem;
   font-weight: 900;
-  font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+  font-size: clamp(1.12rem, 2.4vw, 1.55rem);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -1074,7 +1138,7 @@ main {
   line-height: 1;
 }
 
-@keyframes marqueeInfinite {
+@keyframes marqueeSmooth {
   0% {
     transform: translate3d(0, 0, 0);
   }
@@ -1084,17 +1148,17 @@ main {
 }
 
 /* ==========================================================================
-   ساختار عمومی بخش‌ها و تیترهای گرادیان متحرک
+   ساختار عمومی بخش‌ها و تیترهای گرادیان متحرک آرام
    ========================================================================== */
 .section-wrap {
   max-width: 1160px;
   margin: 0 auto;
-  padding: 4.5rem max(1.25rem, env(safe-area-inset-right)) 4.5rem max(1.25rem, env(safe-area-inset-left));
+  padding: 4.4rem max(1.25rem, env(safe-area-inset-right)) 4.4rem max(1.25rem, env(safe-area-inset-left));
 }
 
 .glass-panel {
   border-radius: 38px;
-  padding: clamp(1.75rem, 4.5vw, 3.6rem);
+  padding: clamp(1.75rem, 4.5vw, 3.5rem);
   position: relative;
   overflow: hidden;
 }
@@ -1118,8 +1182,8 @@ main {
 
 .section-title {
   font-weight: 900;
-  font-size: clamp(2.1rem, 5.2vw, 3.8rem);
-  line-height: 1.2;
+  font-size: clamp(2.1rem, 5.2vw, 3.75rem);
+  line-height: 1.22;
   letter-spacing: -0.015em;
   margin-bottom: 1.15rem;
 }
@@ -1128,29 +1192,29 @@ main {
   background: linear-gradient(
     90deg,
     var(--c-orange) 0%,
-    var(--c-purple) 32%,
-    var(--c-blue) 66%,
+    var(--c-purple) 34%,
+    var(--c-blue) 68%,
     var(--c-orange) 100%
   );
-  background-size: 240% auto;
+  background-size: 220% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-  animation: textGradientFlow 6s linear infinite;
+  animation: textGradientCalm 9s linear infinite;
 }
 
-@keyframes textGradientFlow {
+@keyframes textGradientCalm {
   0% {
     background-position: 0% 50%;
   }
   100% {
-    background-position: 240% 50%;
+    background-position: 220% 50%;
   }
 }
 
 .section-lead {
-  font-size: clamp(1rem, 1.8vw, 1.16rem);
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
   color: var(--text-secondary);
   max-width: 720px;
 }
@@ -1161,10 +1225,10 @@ main {
 }
 
 /* ==========================================================================
-   بخش ۲: درباره من و سه کارت مهارت
+   بخش ۲: درباره من و سه کارت مهارت (واکنش آنی و نرم در هاور)
    ========================================================================== */
 .about-header {
-  margin-bottom: 2.6rem;
+  margin-bottom: 2.5rem;
 }
 
 .features-grid {
@@ -1178,29 +1242,33 @@ main {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.1rem;
-  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.42s ease;
+  gap: 1.05rem;
+  transition:
+    transform 0.5s var(--ease-out-soft),
+    border-color 0.4s ease,
+    background 0.4s ease;
 }
 
-/* افکت بالا آمدن و چرخش جزئی هنگام هاور */
 .feature-card:nth-child(odd):hover {
-  transform: translateY(-12px) rotate(-1.6deg);
-  border-color: rgba(255, 91, 55, 0.55);
+  transform: translate3d(0, -8px, 0) rotate(-1.1deg);
+  background: var(--inner-card-hover);
+  border-color: rgba(255, 91, 55, 0.5);
 }
 
 .feature-card:nth-child(even):hover {
-  transform: translateY(-12px) rotate(1.6deg);
-  border-color: rgba(138, 61, 255, 0.55);
+  transform: translate3d(0, -8px, 0) rotate(1.1deg);
+  background: var(--inner-card-hover);
+  border-color: rgba(138, 61, 255, 0.5);
 }
 
 .feature-card:hover .icon-orb {
-  transform: scale(1.12) rotate(6deg);
+  transform: scale3d(1.09, 1.09, 1) rotate(4deg);
   border-radius: 50%;
 }
 
 .feature-card__title {
   font-weight: 900;
-  font-size: 1.4rem;
+  font-size: 1.38rem;
 }
 
 .feature-card__desc {
@@ -1209,7 +1277,7 @@ main {
 }
 
 /* ==========================================================================
-   بخش ۳: ربات تلگرامی قاپیدن و کارت گفتگوی انیمیشنی
+   بخش ۳: ربات تلگرامی قاپیدن و کارت گفتگوی بدون پرش ارتفاع
    ========================================================================== */
 .bot-showcase {
   display: grid;
@@ -1250,36 +1318,34 @@ main {
 }
 
 .btn-bot-cta {
-  padding: 1.1rem 2.2rem;
-  font-size: 1.08rem;
+  padding: 1.08rem 2.15rem;
+  font-size: 1.06rem;
 }
 
 .btn-bot-cta .material-symbols-rounded {
-  font-size: 26px;
+  font-size: 25px;
 }
 
-/* کارت شیشه‌ای گفتگوی تلگرامی */
 .chat-card {
   padding: 1.35rem;
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 1rem;
   border-radius: 30px;
-  background: var(--glass-bg-strong);
 }
 
 .chat-card__header {
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  padding-bottom: 0.95rem;
+  padding-bottom: 0.9rem;
   border-bottom: 1px solid var(--glass-border-subtle);
 }
 
 .chat-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1295,7 +1361,7 @@ main {
 
 .chat-meta__name {
   font-weight: 900;
-  font-size: 1.02rem;
+  font-size: 1rem;
 }
 
 .chat-meta__id {
@@ -1307,7 +1373,7 @@ main {
   margin-inline-start: auto;
   font-size: 0.78rem;
   font-weight: 600;
-  padding: 0.25rem 0.75rem;
+  padding: 0.24rem 0.75rem;
   border-radius: 999px;
   background: rgba(36, 211, 130, 0.16);
   color: #16a34a;
@@ -1320,131 +1386,141 @@ main {
   }
 }
 
+/* ارتفاع کاملاً ثابت تا صفحه هرگز حتی یک پیکسل بالا و پایین نپرد */
 .chat-card__body {
-  min-height: 292px;
+  height: 288px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 0.9rem;
-  padding: 0.35rem 0.15rem;
+  padding: 0.25rem 0.1rem;
+  overflow: hidden;
 }
 
 .chat-msg {
   max-width: 88%;
-  padding: 0.85rem 1rem;
+  padding: 0.8rem 1rem;
   border-radius: 20px;
   opacity: 0;
-  transform: translateY(16px) scale(0.96);
-  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translate3d(0, 12px, 0);
+  transition:
+    opacity 0.65s var(--ease-out-soft),
+    transform 0.65s var(--ease-out-soft);
   pointer-events: none;
+  will-change: opacity, transform;
 }
 
 .chat-msg.is-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translate3d(0, 0, 0);
   pointer-events: auto;
 }
 
-/* پیام ارسالی کاربر (لینک ریلز) */
 .chat-msg--user {
   align-self: flex-start;
   border-top-right-radius: 6px;
   background: linear-gradient(135deg, var(--c-blue), var(--c-purple));
   color: #ffffff;
-  box-shadow: 0 12px 26px -8px rgba(36, 51, 255, 0.55);
+  box-shadow: 0 10px 24px -8px rgba(36, 51, 255, 0.5);
+  flex-shrink: 0;
 }
 
 .chat-msg__sender {
   display: block;
-  font-size: 0.74rem;
-  opacity: 0.82;
-  margin-bottom: 0.2rem;
+  font-size: 0.73rem;
+  opacity: 0.84;
+  margin-bottom: 0.15rem;
 }
 
 .chat-msg__link {
-  font-size: 0.86rem;
+  font-size: 0.84rem;
   font-weight: 600;
   word-break: break-all;
 }
 
-/* سه‌نقطه تایپ ربات */
+/* جایگاه مشترک سه‌نقطه تایپ و کارت ویدیو بدون تغییر جریان چیدمان */
+.chat-reply-slot {
+  position: relative;
+  flex: 1;
+  width: 100%;
+}
+
 .chat-typing {
-  align-self: flex-end;
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-flex;
   align-items: center;
-  gap: 0.38rem;
+  gap: 0.4rem;
   padding: 0.78rem 1.05rem;
   border-radius: 18px;
   border-top-left-radius: 6px;
-  background: var(--glass-card-bg);
+  background: var(--glass-bg);
   border: 1px solid var(--glass-border);
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  transition:
+    opacity 0.5s var(--ease-out-soft),
+    transform 0.5s var(--ease-out-soft);
+  pointer-events: none;
+  will-change: opacity, transform;
 }
 
 .chat-typing.is-visible {
-  display: inline-flex;
-  animation: fadePopIn 0.3s ease forwards;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
 .typing-dot {
-  width: 8px;
-  height: 8px;
+  width: 7.5px;
+  height: 7.5px;
   border-radius: 50%;
   background: var(--c-orange);
-  animation: typingBounce 1.1s ease-in-out infinite;
+  animation: typingWaveCalm 1.4s var(--ease-in-out-calm) infinite;
 }
 
 .typing-dot:nth-child(2) {
-  animation-delay: 0.18s;
+  animation-delay: 0.2s;
   background: var(--c-purple);
 }
 
 .typing-dot:nth-child(3) {
-  animation-delay: 0.36s;
+  animation-delay: 0.4s;
   background: var(--c-blue);
 }
 
-@keyframes typingBounce {
+@keyframes typingWaveCalm {
   0%, 80%, 100% {
-    transform: translateY(0);
-    opacity: 0.45;
+    transform: translate3d(0, 0, 0);
+    opacity: 0.4;
   }
   40% {
-    transform: translateY(-6px);
+    transform: translate3d(0, -5px, 0);
     opacity: 1;
   }
 }
 
-@keyframes fadePopIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.94);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* پاسخ ویدیویی ربات قاپیدن */
 .chat-msg--bot {
-  align-self: flex-end;
-  width: 248px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 244px;
   border-top-left-radius: 6px;
-  background: var(--glass-card-bg);
+  background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-inner);
-  padding: 0.65rem;
+  padding: 0.62rem;
 }
 
 .reel-preview {
   display: block;
-  border-radius: 16px;
+  border-radius: 15px;
   overflow: hidden;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.55rem;
 }
 
 .reel-preview__art {
-  height: 142px;
+  height: 132px;
   position: relative;
   display: flex;
   align-items: center;
@@ -1456,49 +1532,46 @@ main {
 .reel-wave {
   position: absolute;
   border-radius: 50%;
-  filter: blur(16px);
 }
 
 .reel-wave--one {
-  width: 130px;
-  height: 130px;
-  background: rgba(255, 216, 77, 0.55);
-  top: -30px;
-  right: -20px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(255, 216, 77, 0.55) 0%, transparent 70%);
+  top: -35px;
+  right: -25px;
 }
 
 .reel-wave--two {
-  width: 120px;
-  height: 120px;
-  background: rgba(36, 51, 255, 0.65);
-  bottom: -30px;
-  left: -20px;
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(circle, rgba(36, 51, 255, 0.65) 0%, transparent 70%);
+  bottom: -35px;
+  left: -25px;
 }
 
 .reel-play-btn {
   position: relative;
   z-index: 2;
-  width: 54px;
-  height: 54px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.24);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1.5px solid rgba(255, 255, 255, 0.72);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
-  transition: transform 0.3s ease;
+  background: rgba(255, 255, 255, 0.26);
+  border: 1.5px solid rgba(255, 255, 255, 0.78);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
+  transition: transform 0.4s var(--ease-out-soft);
 }
 
 .reel-play-btn .material-symbols-rounded {
-  font-size: 30px;
+  font-size: 29px;
 }
 
 .reel-preview:hover .reel-play-btn {
-  transform: scale(1.14);
+  transform: scale3d(1.1, 1.1, 1);
 }
 
 .reel-badge {
@@ -1509,7 +1582,7 @@ main {
   font-size: 0.72rem;
   font-weight: 600;
   color: #ffffff;
-  padding: 0.16rem 0.55rem;
+  padding: 0.15rem 0.55rem;
   border-radius: 999px;
   background: rgba(7, 9, 22, 0.58);
 }
@@ -1519,14 +1592,14 @@ main {
   align-items: center;
   gap: 0.42rem;
   font-weight: 900;
-  font-size: 0.94rem;
+  font-size: 0.92rem;
   color: var(--text-primary);
   padding-inline: 0.25rem;
 }
 
 .chat-ready-row .material-symbols-rounded {
   color: #16a34a;
-  font-size: 21px;
+  font-size: 20px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -1561,7 +1634,7 @@ main {
   justify-content: center;
   color: #ffffff;
   flex-shrink: 0;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s var(--ease-out-soft);
 }
 
 .chat-send-btn .material-symbols-rounded {
@@ -1569,18 +1642,18 @@ main {
 }
 
 .chat-send-btn:hover {
-  transform: scale(1.1);
+  transform: scale3d(1.08, 1.08, 1);
 }
 
 /* ==========================================================================
-   بخش ۴: تماس با من و ۴ کارت شیشه‌ای
+   بخش ۴: تماس با من و ۴ کارت شیشه‌ای (هاور فوری و ابریشمی)
    ========================================================================== */
 .contact-header {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2.8rem;
+  margin-bottom: 2.7rem;
 }
 
 .contact-grid {
@@ -1590,23 +1663,26 @@ main {
 }
 
 .contact-card {
-  padding: 2.1rem 1.3rem;
+  padding: 2.05rem 1.3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 0.85rem;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease, background-color 0.35s ease;
+  transition:
+    transform 0.5s var(--ease-out-soft),
+    border-color 0.4s ease,
+    background-color 0.4s ease;
 }
 
 .contact-card:hover {
-  transform: translateY(-12px) scale(1.04);
+  transform: translate3d(0, -9px, 0) scale3d(1.03, 1.03, 1);
   background: var(--glass-bg-strong);
-  border-color: rgba(255, 91, 55, 0.6);
+  border-color: rgba(255, 91, 55, 0.55);
 }
 
 .contact-card:hover .icon-orb {
-  transform: translateY(-4px) scale(1.12);
+  transform: translate3d(0, -3px, 0) scale3d(1.09, 1.09, 1);
   border-radius: 50%;
 }
 
@@ -1617,24 +1693,23 @@ main {
 }
 
 .contact-card__value {
-  font-size: 1.18rem;
+  font-size: 1.16rem;
   font-weight: 900;
   letter-spacing: 0.02em;
 }
 
-/* خط موقعیت مکانی زیر کارت‌های تماس */
 .location-line {
   margin: 2.2rem auto 0;
   width: fit-content;
   max-width: 100%;
-  padding: 0.65rem 1.4rem 0.65rem 0.8rem;
+  padding: 0.62rem 1.4rem 0.62rem 0.78rem;
   border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.7rem;
   font-weight: 600;
-  font-size: 0.98rem;
+  font-size: 0.96rem;
 }
 
 .location-line__icon {
@@ -1664,7 +1739,7 @@ main {
 }
 
 .footer-inner {
-  padding: 1.15rem 1.6rem;
+  padding: 1.12rem 1.6rem;
   border-radius: 999px;
   display: flex;
   flex-wrap: wrap;
@@ -1686,34 +1761,17 @@ main {
   gap: 0.4rem;
   font-weight: 600;
   color: var(--text-primary);
-  transition: color 0.25s ease, transform 0.25s ease;
+  transition: color 0.3s ease, transform 0.35s var(--ease-out-soft);
 }
 
 .footer-top-link:hover {
   color: var(--c-orange);
-  transform: translateY(-2px);
+  transform: translate3d(0, -2px, 0);
 }
 
 .footer-top-link .material-symbols-rounded {
   transform: rotate(180deg);
   font-size: 20px;
-}
-
-/* ==========================================================================
-   انیمیشن ورود تدریجی هنگام اسکرول (IntersectionObserver)
-   ========================================================================== */
-.reveal {
-  opacity: 0;
-  transform: translateY(34px);
-  transition:
-    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* ==========================================================================
@@ -1732,22 +1790,22 @@ main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .hero-badge--one {
+  .hero-badge-wrap--one {
     right: 2%;
   }
 
-  .hero-badge--two {
+  .hero-badge-wrap--two {
     left: 2%;
   }
 
-  .hero-badge--three {
+  .hero-badge-wrap--three {
     right: 4%;
   }
 }
 
 @media (max-width: 720px) {
   .glass-nav {
-    padding: 0.55rem 0.65rem;
+    padding: 0.52rem 0.65rem;
     gap: 0.4rem;
   }
 
@@ -1760,36 +1818,36 @@ main {
   }
 
   .hero {
-    padding-top: calc(5.4rem + env(safe-area-inset-top, 0px));
-    gap: 1.4rem;
+    padding-top: calc(5.3rem + env(safe-area-inset-top, 0px));
+    gap: 1.35rem;
   }
 
   .hero-stage {
-    height: clamp(360px, 98vw, 450px);
+    height: clamp(355px, 95vw, 440px);
   }
 
   .hero-arch-layer {
-    width: clamp(205px, 56vw, 265px);
+    width: clamp(200px, 55vw, 260px);
   }
 
   .hero-ring-layer {
-    width: clamp(285px, 80vw, 375px);
-    height: clamp(285px, 80vw, 375px);
+    width: clamp(280px, 78vw, 365px);
+    height: clamp(280px, 78vw, 365px);
   }
 
   .hero-name--back {
-    top: 3%;
-    font-size: clamp(3.5rem, 18.5vw, 5.5rem);
+    top: 4%;
+    font-size: clamp(3.15rem, 16.5vw, 5.1rem);
   }
 
   .hero-name--front {
     bottom: 4%;
-    font-size: clamp(3.25rem, 16.5vw, 5.1rem);
-    -webkit-text-stroke: 2px var(--hero-front-stroke);
+    font-size: clamp(2.95rem, 15.2vw, 4.8rem);
+    -webkit-text-stroke: 1.9px var(--hero-front-stroke);
   }
 
   .hero-badge {
-    padding: 0.38rem 0.75rem 0.38rem 0.45rem;
+    padding: 0.38rem 0.72rem 0.38rem 0.44rem;
     font-size: 0.78rem;
     gap: 0.4rem;
   }
@@ -1803,23 +1861,23 @@ main {
     font-size: 16px;
   }
 
-  .hero-badge--one {
+  .hero-badge-wrap--one {
     top: 18%;
     right: 0;
   }
 
-  .hero-badge--two {
+  .hero-badge-wrap--two {
     top: 47%;
     left: 0;
   }
 
-  .hero-badge--three {
+  .hero-badge-wrap--three {
     bottom: 20%;
     right: 1%;
   }
 
   .section-wrap {
-    padding-block: 3.2rem;
+    padding-block: 3.1rem;
   }
 
   .contact-grid {

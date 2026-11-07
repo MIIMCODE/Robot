@@ -6,38 +6,34 @@ document.addEventListener('DOMContentLoaded', () => {
   const desktopPointerQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
 
   /* ========================================================================
-     ۱. بارگذاری ایمن فونت آیکون‌ها (جلوگیری از نمایش متن انگلیسی آیکون)
+     ۱. بارگذاری ایمن آیکون‌ها با document.fonts.ready (سازگار با سافاری و کروم)
      ======================================================================== */
-  const revealIconsIfLoaded = () => {
-    if (root.classList.contains('icons-ready')) return;
-    if (!document.fonts || !document.fonts.ready) {
-      root.classList.add('icons-ready');
-      return;
-    }
-
-    Promise.all([
-      document.fonts.load("400 24px 'Material Symbols Rounded'"),
-      document.fonts.ready
-    ])
-      .then(([loadedFaces]) => {
-        if ((loadedFaces && loadedFaces.length > 0) || document.fonts.check("24px 'Material Symbols Rounded'")) {
-          root.classList.add('icons-ready');
-        }
-      })
-      .catch(() => {
-        /* در صورت عدم دسترسی به اینترنت، متن خام آیکون‌ها مخفی می‌ماند */
-      });
+  const revealIcons = () => {
+    root.classList.add('icons-ready');
   };
 
-  revealIconsIfLoaded();
-  window.addEventListener('load', revealIconsIfLoaded, { once: true });
-  if (document.fonts && document.fonts.addEventListener) {
-    document.fonts.addEventListener('loadingdone', revealIconsIfLoaded);
+  if (document.fonts && document.fonts.ready) {
+    Promise.allSettled([
+      document.fonts.load("400 24px 'Material Symbols Rounded'"),
+      document.fonts.ready
+    ]).then(revealIcons);
+
+    /* تضمین نمایش در تمام مرورگرهای موبایل پس از لود کامل صفحه */
+    window.addEventListener(
+      'load',
+      () => {
+        window.setTimeout(revealIcons, 600);
+      },
+      { once: true }
+    );
+  } else {
+    revealIcons();
   }
 
   /* ========================================================================
-     ۲. نوار پیشرفت اسکرول بالای صفحه و لینک فعال منو
+     ۲. نوار پیشرفت اسکرول و لینک فعال منو (بدون بازمحاسبه کل DOM)
      ======================================================================== */
+  const progressBar = document.getElementById('scrollProgressBar');
   const navLinks = Array.from(document.querySelectorAll('.nav-link'));
   const trackedSections = navLinks
     .map((link) => {
@@ -47,16 +43,18 @@ document.addEventListener('DOMContentLoaded', () => {
     .filter(Boolean);
 
   let scrollTicking = false;
+  let lastActiveId = '';
 
   const updateScrollState = () => {
     const scrollTop = window.scrollY || root.scrollTop;
     const maxScroll = Math.max(root.scrollHeight - window.innerHeight, 1);
     const progress = Math.min(Math.max(scrollTop / maxScroll, 0), 1);
 
-    root.style.setProperty('--scroll-progress', progress.toFixed(4));
+    if (progressBar) {
+      progressBar.style.setProperty('--scroll-progress', progress.toFixed(4));
+    }
 
-    /* تشخیص بخش فعلی برای هایلایت منو */
-    const marker = scrollTop + window.innerHeight * 0.35;
+    const marker = scrollTop + window.innerHeight * 0.36;
     let activeId = trackedSections[0] ? trackedSections[0].id : 'hero';
 
     for (const section of trackedSections) {
@@ -65,9 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    for (const link of navLinks) {
-      const isCurrent = link.getAttribute('href') === `#${activeId}`;
-      link.classList.toggle('is-active', isCurrent);
+    if (activeId !== lastActiveId) {
+      lastActiveId = activeId;
+      for (const link of navLinks) {
+        link.classList.toggle('is-active', link.getAttribute('href') === `#${activeId}`);
+      }
     }
 
     scrollTicking = false;
@@ -88,30 +88,41 @@ document.addEventListener('DOMContentLoaded', () => {
   updateScrollState();
 
   /* ========================================================================
-     ۳. ورود تدریجی بخش‌ها هنگام اسکرول با تأخیر پله‌ای (IntersectionObserver)
+     ۳. ورود تدریجی بخش‌ها هنگام اسکرول + حذف تأخیر پس از ورود برای هاور فوری
      ======================================================================== */
   const revealItems = document.querySelectorAll('.reveal');
 
   revealItems.forEach((item) => {
     const step = Number(item.dataset.delay || 0);
-    item.style.setProperty('--reveal-delay', `${step * 115}ms`);
+    item.style.setProperty('--reveal-delay', `${step * 95}ms`);
   });
 
+  const markRevealComplete = (el) => {
+    const step = Number(el.dataset.delay || 0);
+    el.classList.add('is-visible');
+    window.setTimeout(() => {
+      el.classList.add('reveal-done');
+      el.style.removeProperty('--reveal-delay');
+    }, step * 95 + 920);
+  };
+
   if (reducedMotionQuery.matches || !('IntersectionObserver' in window)) {
-    revealItems.forEach((item) => item.classList.add('is-visible'));
+    revealItems.forEach((item) => {
+      item.classList.add('is-visible', 'reveal-done');
+    });
   } else {
     const revealObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
+            markRevealComplete(entry.target);
             observer.unobserve(entry.target);
           }
         });
       },
       {
-        threshold: 0.14,
-        rootMargin: '0px 0px -40px 0px'
+        threshold: 0.12,
+        rootMargin: '0px 0px -30px 0px'
       }
     );
 
@@ -119,42 +130,78 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ========================================================================
-     ۴. پارالاکس عمق هیرو (موس و لمس انگشت) + نور دنبال‌کننده موس (دسکتاپ)
+     ۴. پارالاکس ابریشمی و آرام هیرو + نور نرم موس در دسکتاپ
      ======================================================================== */
   const parallaxStage = document.getElementById('parallaxStage');
-  const spotlight = document.querySelector('.cursor-spotlight');
+  const heroSection = document.getElementById('hero');
+  const spotlight = document.getElementById('cursorSpotlight');
+
+  let heroInView = true;
+  if (heroSection && 'IntersectionObserver' in window) {
+    const heroVisObserver = new IntersectionObserver(
+      (entries) => {
+        heroInView = entries[0].isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    heroVisObserver.observe(heroSection);
+  }
 
   let targetPx = 0;
   let targetPy = 0;
   let currentPx = 0;
   let currentPy = 0;
-  let parallaxRaf = null;
 
-  const animateParallax = () => {
-    currentPx += (targetPx - currentPx) * 0.12;
-    currentPy += (targetPy - currentPy) * 0.12;
+  let targetSpotX = window.innerWidth * 0.5;
+  let targetSpotY = window.innerHeight * 0.35;
+  let currentSpotX = targetSpotX;
+  let currentSpotY = targetSpotY;
+  let pointerRaf = null;
 
-    root.style.setProperty('--px', currentPx.toFixed(4));
-    root.style.setProperty('--py', currentPy.toFixed(4));
+  const animatePointerEffects = () => {
+    let keepRunning = false;
 
-    if (Math.abs(targetPx - currentPx) > 0.001 || Math.abs(targetPy - currentPy) > 0.001) {
-      parallaxRaf = window.requestAnimationFrame(animateParallax);
+    /* نرم‌سازی بسیار آرام پارالاکس هیرو */
+    if (parallaxStage && heroInView) {
+      const dx = targetPx - currentPx;
+      const dy = targetPy - currentPy;
+
+      if (Math.abs(dx) > 0.0008 || Math.abs(dy) > 0.0008) {
+        currentPx += dx * 0.055;
+        currentPy += dy * 0.055;
+        parallaxStage.style.setProperty('--px', currentPx.toFixed(4));
+        parallaxStage.style.setProperty('--py', currentPy.toFixed(4));
+        keepRunning = true;
+      }
+    }
+
+    /* نرم‌سازی حرکت نور موس فقط روی خودش با GPU */
+    if (spotlight && desktopPointerQuery.matches) {
+      const sx = targetSpotX - currentSpotX;
+      const sy = targetSpotY - currentSpotY;
+
+      if (Math.abs(sx) > 0.25 || Math.abs(sy) > 0.25) {
+        currentSpotX += sx * 0.085;
+        currentSpotY += sy * 0.085;
+        spotlight.style.setProperty('--spot-x', `${currentSpotX.toFixed(1)}px`);
+        spotlight.style.setProperty('--spot-y', `${currentSpotY.toFixed(1)}px`);
+        keepRunning = true;
+      }
+    }
+
+    if (keepRunning && !reducedMotionQuery.matches) {
+      pointerRaf = window.requestAnimationFrame(animatePointerEffects);
     } else {
-      parallaxRaf = null;
+      pointerRaf = null;
     }
   };
 
-  const scheduleParallax = (nx, ny) => {
-    if (reducedMotionQuery.matches) return;
-    targetPx = Math.max(-1, Math.min(1, nx));
-    targetPy = Math.max(-1, Math.min(1, ny));
-
-    if (!parallaxRaf) {
-      parallaxRaf = window.requestAnimationFrame(animateParallax);
+  const requestPointerTick = () => {
+    if (!pointerRaf && !reducedMotionQuery.matches) {
+      pointerRaf = window.requestAnimationFrame(animatePointerEffects);
     }
   };
 
-  /* حرکت موس برای پارالاکس و نور دسکتاپ */
   window.addEventListener(
     'mousemove',
     (event) => {
@@ -162,13 +209,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (desktopPointerQuery.matches && spotlight) {
         spotlight.classList.add('is-active');
-        root.style.setProperty('--spot-x', `${event.clientX}px`);
-        root.style.setProperty('--spot-y', `${event.clientY}px`);
+        targetSpotX = event.clientX;
+        targetSpotY = event.clientY;
       }
 
-      const nx = (event.clientX / window.innerWidth - 0.5) * 2;
-      const ny = (event.clientY / window.innerHeight - 0.5) * 2;
-      scheduleParallax(nx, ny);
+      if (heroInView) {
+        targetPx = (event.clientX / window.innerWidth - 0.5) * 2;
+        targetPy = (event.clientY / window.innerHeight - 0.5) * 2;
+      }
+
+      requestPointerTick();
     },
     { passive: true }
   );
@@ -176,25 +226,46 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener(
     'mouseleave',
     () => {
-      scheduleParallax(0, 0);
+      targetPx = 0;
+      targetPy = 0;
       if (spotlight) {
         spotlight.classList.remove('is-active');
       }
+      requestPointerTick();
     },
     { passive: true }
   );
 
-  /* حرکت انگشت روی بخش هیرو در موبایل و تبلت */
+  /* لمس انگشت در موبایل بدون تداخل با اسکرول عمودی صفحه */
   if (parallaxStage) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    parallaxStage.addEventListener(
+      'touchstart',
+      (event) => {
+        if (!event.touches.length) return;
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+      },
+      { passive: true }
+    );
+
     parallaxStage.addEventListener(
       'touchmove',
       (event) => {
         if (reducedMotionQuery.matches || !event.touches.length) return;
         const touch = event.touches[0];
-        const rect = parallaxStage.getBoundingClientRect();
-        const nx = ((touch.clientX - rect.left) / rect.width - 0.5) * 2;
-        const ny = ((touch.clientY - rect.top) / rect.height - 0.5) * 2;
-        scheduleParallax(nx, ny);
+        const moveX = touch.clientX - touchStartX;
+        const moveY = touch.clientY - touchStartY;
+
+        /* فقط در حرکت افقی آرام پارالاکس اعمال شود تا اسکرول عمودی کاملاً روان بماند */
+        if (Math.abs(moveX) > Math.abs(moveY)) {
+          const rect = parallaxStage.getBoundingClientRect();
+          targetPx = Math.max(-0.7, Math.min(0.7, ((touch.clientX - rect.left) / rect.width - 0.5) * 1.4));
+          targetPy = 0;
+          requestPointerTick();
+        }
       },
       { passive: true }
     );
@@ -202,14 +273,16 @@ document.addEventListener('DOMContentLoaded', () => {
     parallaxStage.addEventListener(
       'touchend',
       () => {
-        scheduleParallax(0, 0);
+        targetPx = 0;
+        targetPy = 0;
+        requestPointerTick();
       },
       { passive: true }
     );
   }
 
   /* ========================================================================
-     ۵. گفتگوی انیمیشنی تکرارشونده ربات تلگرامی «قاپیدن»
+     ۵. گفتگوی انیمیشنی آرام و بدون پرش برای ربات تلگرامی «قاپیدن»
      ======================================================================== */
   const stepUser = document.getElementById('chatStepUser');
   const stepTyping = document.getElementById('chatStepTyping');
@@ -238,49 +311,65 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    /* بازنشانی وضعیت ابتدای چرخه */
     stepUser.classList.remove('is-visible');
     stepTyping.classList.remove('is-visible');
     stepBot.classList.remove('is-visible');
 
-    /* گام اول: کاربر لینک ریلز اینستاگرام را ارسال می‌کند */
+    /* گام اول: ارسال آرام لینک ریلز توسط کاربر */
     chatTimers.push(
       window.setTimeout(() => {
         stepUser.classList.add('is-visible');
-      }, 450)
+      }, 650)
     );
 
-    /* گام دوم: نمایش سه‌نقطه تایپ و پردازش ربات */
+    /* گام دوم: نمایش نرم سه‌نقطه تایپ ربات */
     chatTimers.push(
       window.setTimeout(() => {
         stepTyping.classList.add('is-visible');
-      }, 1550)
+      }, 2050)
     );
 
-    /* گام سوم: ارسال ویدیوی ریلز با پیام «آماده شد» */
+    /* گام سوم: جایگزینی نرم سه‌نقطه با ویدیوی ریلز و پیام «آماده شد» */
     chatTimers.push(
       window.setTimeout(() => {
         stepTyping.classList.remove('is-visible');
         stepBot.classList.add('is-visible');
-      }, 3150)
+      }, 4100)
     );
 
-    /* گام چهارم: مکث برای مشاهده و تکرار نرم گفتگو */
+    /* گام چهارم: مکث طولانی و آرام پیش از شروع چرخه بعدی */
+    chatTimers.push(
+      window.setTimeout(() => {
+        stepUser.classList.remove('is-visible');
+        stepBot.classList.remove('is-visible');
+      }, 9200)
+    );
+
     chatTimers.push(
       window.setTimeout(() => {
         runChatCycle();
-      }, 7400)
+      }, 10100)
     );
   };
 
   runChatCycle();
 
-  /* واکنش زنده به تغییر تنظیمات حرکت سیستم کاربر */
+  /* توقف تایمر هنگام مخفی بودن تب مرورگر و شروع تمیز هنگام بازگشت */
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      clearChatTimers();
+    } else {
+      runChatCycle();
+    }
+  });
+
   reducedMotionQuery.addEventListener('change', (event) => {
     if (event.matches) {
-      root.style.setProperty('--px', '0');
-      root.style.setProperty('--py', '0');
-      revealItems.forEach((item) => item.classList.add('is-visible'));
+      if (parallaxStage) {
+        parallaxStage.style.setProperty('--px', '0');
+        parallaxStage.style.setProperty('--py', '0');
+      }
+      revealItems.forEach((item) => item.classList.add('is-visible', 'reveal-done'));
       showStaticChat();
     } else {
       runChatCycle();

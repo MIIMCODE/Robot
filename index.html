@@ -19,13 +19,13 @@
 <body>
   <!-- نوار پیشرفت اسکرول بالای صفحه -->
   <div class="scroll-progress" aria-hidden="true">
-    <div class="scroll-progress__bar"></div>
+    <div class="scroll-progress__bar" id="scrollProgressBar"></div>
   </div>
 
-  <!-- نور تعاملی دنبال‌کننده موس در دسکتاپ -->
-  <div class="cursor-spotlight" aria-hidden="true"></div>
+  <!-- نور نرم دنبال‌کننده موس در دسکتاپ -->
+  <div class="cursor-spotlight" id="cursorSpotlight" aria-hidden="true"></div>
 
-  <!-- پس‌زمینه پویا با ۴ حباب رنگی در حال تغییر شکل و حرکت -->
+  <!-- پس‌زمینه آرام با ۴ حباب رنگی نرم و بدون فشار گرافیکی -->
   <div class="ambient-bg" aria-hidden="true">
     <div class="ambient-blob blob-blue"></div>
     <div class="ambient-blob blob-orange"></div>
@@ -57,7 +57,7 @@
   </header>
 
   <main id="main-content">
-    <!-- بخش اول: هیرو با لایه‌های عمقی و پارالاکس -->
+    <!-- بخش اول: هیرو با لایه‌های عمقی و پارالاکس نرم -->
     <section id="hero" class="hero" aria-label="معرفی محمدرضا محمدی">
       <div class="hero-stage" id="parallaxStage">
         <!-- عنوان اصلی دو لایه: نام در پشت عکس و نام خانوادگی خط‌دور در جلوی عکس -->
@@ -102,26 +102,32 @@
           </figure>
         </div>
 
-        <!-- سه برچسب شیشه‌ای شناور با عمق‌های متفاوت -->
-        <div class="hero-badge hero-badge--one">
-          <span class="badge-icon icon-grad-orange" aria-hidden="true">
-            <span class="material-symbols-rounded" aria-hidden="true">palette</span>
-          </span>
-          <span class="badge-text">طراح سایت</span>
+        <!-- سه برچسب شیشه‌ای شناور با جداسازی لایه پارالاکس و لایه شناور -->
+        <div class="hero-badge-wrap hero-badge-wrap--one">
+          <div class="hero-badge hero-badge--one">
+            <span class="badge-icon icon-grad-orange" aria-hidden="true">
+              <span class="material-symbols-rounded" aria-hidden="true">palette</span>
+            </span>
+            <span class="badge-text">طراح سایت</span>
+          </div>
         </div>
 
-        <div class="hero-badge hero-badge--two">
-          <span class="badge-icon icon-grad-blue" aria-hidden="true">
-            <span class="material-symbols-rounded" aria-hidden="true">code</span>
-          </span>
-          <span class="badge-text">فرانت‌اند</span>
+        <div class="hero-badge-wrap hero-badge-wrap--two">
+          <div class="hero-badge hero-badge--two">
+            <span class="badge-icon icon-grad-blue" aria-hidden="true">
+              <span class="material-symbols-rounded" aria-hidden="true">code</span>
+            </span>
+            <span class="badge-text">فرانت‌اند</span>
+          </div>
         </div>
 
-        <div class="hero-badge hero-badge--three">
-          <span class="badge-icon icon-grad-purple" aria-hidden="true">
-            <span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span>
-          </span>
-          <span class="badge-text">سلام گرافیک</span>
+        <div class="hero-badge-wrap hero-badge-wrap--three">
+          <div class="hero-badge hero-badge--three">
+            <span class="badge-icon icon-grad-purple" aria-hidden="true">
+              <span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span>
+            </span>
+            <span class="badge-text">سلام گرافیک</span>
+          </div>
         </div>
       </div>
 
@@ -235,7 +241,7 @@
         </div>
 
         <div class="features-grid">
-          <article class="glass-card feature-card reveal" data-delay="1">
+          <article class="inner-glass-card feature-card reveal" data-delay="1">
             <div class="icon-orb icon-grad-orange" aria-hidden="true">
               <span class="material-symbols-rounded" aria-hidden="true">palette</span>
             </div>
@@ -245,7 +251,7 @@
             </p>
           </article>
 
-          <article class="glass-card feature-card reveal" data-delay="2">
+          <article class="inner-glass-card feature-card reveal" data-delay="2">
             <div class="icon-orb icon-grad-blue" aria-hidden="true">
               <span class="material-symbols-rounded" aria-hidden="true">code</span>
             </div>
@@ -255,7 +261,7 @@
             </p>
           </article>
 
-          <article class="glass-card feature-card reveal" data-delay="3">
+          <article class="inner-glass-card feature-card reveal" data-delay="3">
             <div class="icon-orb icon-grad-purple" aria-hidden="true">
               <span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span>
             </div>
@@ -312,9 +318,9 @@
           </a>
         </div>
 
-        <!-- ستون کارت شیشه‌ای گفتگوی انیمیشنی تکرارشونده -->
+        <!-- ستون کارت شیشه‌ای گفتگوی انیمیشنی تکرارشونده (بدون هیچ تغییر ارتفاع و پرش صفحه) -->
         <div class="bot-demo-wrap reveal" data-delay="2">
-          <div class="glass-card chat-card" id="botChatDemo" aria-label="پیش‌نمایش عملکرد ربات تلگرامی قاپیدن">
+          <div class="inner-glass-card chat-card" id="botChatDemo" aria-label="پیش‌نمایش عملکرد ربات تلگرامی قاپیدن">
             <div class="chat-card__header">
               <div class="chat-avatar icon-grad-orange" aria-hidden="true">
                 <span class="material-symbols-rounded" aria-hidden="true">smart_toy</span>
@@ -333,35 +339,38 @@
                 <p class="chat-msg__link" dir="ltr">https://instagram.com/reel/C9xK2pLmQ/</p>
               </div>
 
-              <!-- مرحله دوم: سه‌نقطه در حال تایپ و پردازش -->
-              <div class="chat-typing" id="chatStepTyping" aria-hidden="true">
-                <span class="typing-dot"></span>
-                <span class="typing-dot"></span>
-                <span class="typing-dot"></span>
-              </div>
+              <!-- ناحیه ثابت پاسخ ربات برای جلوگیری کامل از پرش ارتفاع -->
+              <div class="chat-reply-slot">
+                <!-- مرحله دوم: سه‌نقطه در حال تایپ و پردازش -->
+                <div class="chat-typing" id="chatStepTyping" aria-hidden="true">
+                  <span class="typing-dot"></span>
+                  <span class="typing-dot"></span>
+                  <span class="typing-dot"></span>
+                </div>
 
-              <!-- مرحله سوم: پاسخ ویدیویی ربات همراه با پیام آماده شد -->
-              <div class="chat-msg chat-msg--bot" id="chatStepBot">
-                <a
-                  href="https://t.me/Ghapidan_bot"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="reel-preview"
-                  aria-label="مشاهده و دانلود ریلز در ربات قاپیدن"
-                >
-                  <div class="reel-preview__art" aria-hidden="true">
-                    <div class="reel-wave reel-wave--one"></div>
-                    <div class="reel-wave reel-wave--two"></div>
-                    <div class="reel-play-btn">
-                      <span class="material-symbols-rounded" aria-hidden="true">play_arrow</span>
+                <!-- مرحله سوم: پاسخ ویدیویی ربات همراه با پیام آماده شد -->
+                <div class="chat-msg chat-msg--bot" id="chatStepBot">
+                  <a
+                    href="https://t.me/Ghapidan_bot"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="reel-preview"
+                    aria-label="مشاهده و دانلود ریلز در ربات قاپیدن"
+                  >
+                    <div class="reel-preview__art" aria-hidden="true">
+                      <div class="reel-wave reel-wave--one"></div>
+                      <div class="reel-wave reel-wave--two"></div>
+                      <div class="reel-play-btn">
+                        <span class="material-symbols-rounded" aria-hidden="true">play_arrow</span>
+                      </div>
+                      <span class="reel-badge" dir="ltr">HD • 00:24</span>
                     </div>
-                    <span class="reel-badge" dir="ltr">HD • 00:24</span>
-                  </div>
-                </a>
+                  </a>
 
-                <div class="chat-ready-row">
-                  <span class="material-symbols-rounded" aria-hidden="true">check_circle</span>
-                  <span class="chat-ready-text">آماده شد</span>
+                  <div class="chat-ready-row">
+                    <span class="material-symbols-rounded" aria-hidden="true">check_circle</span>
+                    <span class="chat-ready-text">آماده شد</span>
+                  </div>
                 </div>
               </div>
             </div>
