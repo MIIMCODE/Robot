@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="وب‌سایت شخصی محمدرضا محمدی، طراح سایت و توسعه‌دهنده فرانت‌اند در مشهد مقدس، شرکت سلام گرافیک و سازنده ربات تلگرامی قاپیدن.">
+  <meta name="theme-color" content="#090b1a">
+  <title>محمدرضا محمدی | طراح سایت و توسعه‌دهنده فرانت‌اند</title>
+
+  <!-- آیکون‌های رسمی گوگل (Material Symbols Rounded) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0">
+
+  <!-- استایل و اسکریپت محلی -->
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- نوار پیشرفت اسکرول بالای صفحه -->
+  <div class="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress__bar"></div>
+  </div>
+
+  <!-- نور تعاملی دنبال‌کننده موس در دسکتاپ -->
+  <div class="cursor-spotlight" aria-hidden="true"></div>
+
+  <!-- پس‌زمینه پویا با ۴ حباب رنگی در حال تغییر شکل و حرکت -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="ambient-blob blob-blue"></div>
+    <div class="ambient-blob blob-orange"></div>
+    <div class="ambient-blob blob-purple"></div>
+    <div class="ambient-blob blob-yellow"></div>
+    <div class="ambient-grid"></div>
+  </div>
+
+  <!-- منوی شیشه‌ای شناور -->
+  <header class="site-header">
+    <nav class="glass-nav" aria-label="منوی اصلی">
+      <a href="#hero" class="nav-brand" aria-label="صفحه اصلی محمدرضا محمدی">
+        <span class="nav-brand__dot" aria-hidden="true"></span>
+        <span class="nav-brand__name">محمدرضا محمدی</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link is-active">خانه</a></li>
+        <li><a href="#about" class="nav-link">درباره من</a></li>
+        <li><a href="#bot" class="nav-link">ربات قاپیدن</a></li>
+        <li><a href="#contact" class="nav-link">تماس</a></li>
+      </ul>
+
+      <a href="https://t.me/MRM_TK" target="_blank" rel="noopener noreferrer" class="nav-cta" aria-label="ارسال پیام مستقیم در تلگرام">
+        <span class="material-symbols-rounded" aria-hidden="true">send</span>
+        <span>همکاری</span>
+      </a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <!-- بخش اول: هیرو با لایه‌های عمقی و پارالاکس -->
+    <section id="hero" class="hero" aria-label="معرفی محمدرضا محمدی">
+      <div class="hero-stage" id="parallaxStage">
+        <!-- عنوان اصلی دو لایه: نام در پشت عکس و نام خانوادگی خط‌دور در جلوی عکس -->
+        <h1 class="hero-heading">
+          <span class="hero-name hero-name--back">
+            <span class="hero-name__clip">محمدرضا</span>
+          </span>
+          <span class="hero-name hero-name--front">
+            <span class="hero-name__clip">محمدی</span>
+          </span>
+        </h1>
+
+        <!-- حلقه متن چرخان SVG دور قاب عکس -->
+        <div class="hero-ring-layer" aria-hidden="true">
+          <svg class="hero-ring-svg" viewBox="0 0 520 520">
+            <defs>
+              <path id="heroOrbitPath" d="M 260, 260 m -216, 0 a 216,216 0 1,1 432,0 a 216,216 0 1,1 -432,0"></path>
+            </defs>
+            <text class="hero-ring-text">
+              <textPath href="#heroOrbitPath" startOffset="0%">
+                Web Designer • Front-End Developer • Mashhad • Web Designer • Front-End Developer • Mashhad •
+              </textPath>
+            </text>
+          </svg>
+        </div>
+
+        <!-- قاب طاقی شیشه‌ای عکس با هاله نور نارنجی -->
+        <div class="hero-arch-layer">
+          <div class="hero-arch-glow" aria-hidden="true"></div>
+          <figure class="hero-arch-frame">
+            <div class="hero-arch-inner">
+              <img
+                src="img/me.jpg"
+                alt="پرتره محمدرضا محمدی، طراح سایت و توسعه‌دهنده فرانت‌اند در مشهد مقدس"
+                class="hero-photo"
+                width="1086"
+                height="1448"
+                fetchpriority="high"
+              >
+              <div class="hero-arch-shine" aria-hidden="true"></div>
+            </div>
+          </figure>
+        </div>
+
+        <!-- سه برچسب شیشه‌ای شناور با عمق‌های متفاوت -->
+        <div class="hero-badge hero-badge--one">
+          <span class="badge-icon icon-grad-orange" aria-hidden="true">
+            <span class="material-symbols-rounded" aria-hidden="true">palette</span>
+          </span>
+          <span class="badge-text">طراح سایت</span>
+        </div>
+
+        <div class="hero-badge hero-badge--two">
+          <span class="badge-icon icon-grad-blue" aria-hidden="true">
+            <span class="material-symbols-rounded" aria-hidden="true">code</span>
+          </span>
+          <span class="badge-text">فرانت‌اند</span>
+        </div>
+
+        <div class="hero-badge hero-badge--three">
+          <span class="badge-icon icon-grad-purple" aria-hidden="true">
+            <span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span>
+          </span>
+          <span class="badge-text">سلام گرافیک</span>
+        </div>
+      </div>
+
+      <!-- زیرعنوان، دکمه‌های فراخوان و راهنمای اسکرول -->
+      <div class="hero-intro reveal" data-delay="1">
+        <p class="hero-role">
+          طراح سایت و توسعه‌دهنده فرانت‌اند
+          <span class="hero-role__sep" aria-hidden="true">•</span>
+          <span>ایران، مشهد مقدس</span>
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary btn-pulse">
+            <span class="material-symbols-rounded" aria-hidden="true">send</span>
+            <span>شروع پروژه مشترک</span>
+          </a>
+          <a href="#bot" class="btn-glass">
+            <span class="material-symbols-rounded" aria-hidden="true">smart_toy</span>
+            <span>ربات تلگرامی قاپیدن</span>
+          </a>
+        </div>
+
+        <a href="#about" class="scroll-cue" aria-label="اسکرول به بخش درباره من">
+          <span class="scroll-cue__label">اسکرول کنید</span>
+          <span class="scroll-cue__circle">
+            <span class="material-symbols-rounded" aria-hidden="true">keyboard_arrow_down</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- بخش ۱: نوار متحرک مایل زرد -->
+    <section class="marquee-section" aria-label="مهارت‌های کلیدی">
+      <div class="marquee-ribbon">
+        <div class="marquee-track" dir="ltr">
+          <div class="marquee-group">
+            <span>HTML</span>
+            <span class="marquee-dot" aria-hidden="true">•</span>
+            <span>CSS</span>
+            <span class="marquee-dot" aria-hidden="true">•</span>
+            <span>JavaScript</span>
+            <span class="marquee-dot" aria-hidden="true">•</span>
+            <span>UI Design</span>
+            <span class="marquee-dot" aria-hidden="true">•</span>
+            <span>Animation</span>
+            <span class="marquee-dot" aria-hidden="true">•</span>
+            <span>Responsive</span>
+            <span class="marquee-dot" aria-hidden="true">•</span>
+            <span>HTML</span>
+            <span class="marquee-dot" aria-hidden="true">•</span>
+            <span>CSS</span>
+            <span class="marquee-dot" aria-hidden="true">•</span>
+            <span>JavaScript</span>
+            <span class="marquee-dot" aria-hidden="true">•</span>
+            <span>UI Design</span>
+            <span class="marquee-dot" aria-hidden="true">•</span>
+            <span>Animation</span>
+            <span class="marquee-dot" aria-hidden="true">•</span>
+            <span>Responsive</span>
+            <span class="marquee-dot" aria-hidden="true">•</span>
+          </div>
+          <div class="marquee-group" aria-hidden="true">
+            <span>HTML</span>
+            <span class="marquee-dot">•</span>
+            <span>CSS</span>
+            <span class="marquee-dot">•</span>
+            <span>JavaScript</span>
+            <span class="marquee-dot">•</span>
+            <span>UI Design</span>
+            <span class="marquee-dot">•</span>
+            <span>Animation</span>
+            <span class="marquee-dot">•</span>
+            <span>Responsive</span>
+            <span class="marquee-dot">•</span>
+            <span>HTML</span>
+            <span class="marquee-dot">•</span>
+            <span>CSS</span>
+            <span class="marquee-dot">•</span>
+            <span>JavaScript</span>
+            <span class="marquee-dot">•</span>
+            <span>UI Design</span>
+            <span class="marquee-dot">•</span>
+            <span>Animation</span>
+            <span class="marquee-dot">•</span>
+            <span>Responsive</span>
+            <span class="marquee-dot">•</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- بخش ۲: درباره من -->
+    <section id="about" class="section-wrap">
+      <div class="glass-panel about-panel reveal" data-delay="0">
+        <div class="about-header">
+          <span class="section-pill">
+            <span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span>
+            <span>درباره من</span>
+          </span>
+
+          <h2 class="section-title">
+            سایت‌هایی که <span class="animated-gradient-text">دیده می‌شوند.</span>
+          </h2>
+
+          <p class="section-lead">
+            من <strong>محمدرضا محمدی</strong> هستم؛ طراح سایت و توسعه‌دهنده فرانت‌اند در شهر
+            <strong>مشهد مقدس</strong> و عضو تیم <strong>سلام گرافیک</strong>. تمرکز من خلق تجربه‌های وب مدرن،
+            سریع و چشم‌نواز است؛ جایی که زیبایی‌شناسی شیشه‌ای، تایپوگرافی جسورانه و انیمیشن‌های نرم در کنار کدنویسی دقیق،
+            برند شما را در ذهن مخاطب ماندگار می‌کند.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <article class="glass-card feature-card reveal" data-delay="1">
+            <div class="icon-orb icon-grad-orange" aria-hidden="true">
+              <span class="material-symbols-rounded" aria-hidden="true">palette</span>
+            </div>
+            <h3 class="feature-card__title">طراحی رابط</h3>
+            <p class="feature-card__desc">
+              خلق رابط‌های کاربری مدرن با گلس‌مورفیسم اصیل، سلسله‌مراتب بصری دقیق و چیدمان اختصاصی منطبق با هویت برند.
+            </p>
+          </article>
+
+          <article class="glass-card feature-card reveal" data-delay="2">
+            <div class="icon-orb icon-grad-blue" aria-hidden="true">
+              <span class="material-symbols-rounded" aria-hidden="true">code</span>
+            </div>
+            <h3 class="feature-card__title">فرانت‌اند</h3>
+            <p class="feature-card__desc">
+              پیاده‌سازی استاندارد، تمیز و کاملاً واکنش‌گرا با سرعت بارگذاری بالا، دسترس‌پذیری کامل و سازگاری روی تمام نمایشگرها.
+            </p>
+          </article>
+
+          <article class="glass-card feature-card reveal" data-delay="3">
+            <div class="icon-orb icon-grad-purple" aria-hidden="true">
+              <span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span>
+            </div>
+            <h3 class="feature-card__title">انیمیشن</h3>
+            <p class="feature-card__desc">
+              طراحی ریزتعامل‌ها، پارالاکس چندلایه و حرکت‌های روان در سطح شصت فریم بر ثانیه که به صفحات وب روح و عمق می‌بخشند.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- بخش ۳: ربات تلگرامی قاپیدن -->
+    <section id="bot" class="section-wrap">
+      <div class="glass-panel bot-showcase reveal" data-delay="0">
+        <!-- ستون معرفی و دکمه ربات -->
+        <div class="bot-info reveal" data-delay="1">
+          <div class="bot-logo-row">
+            <div class="icon-orb icon-orb--lg icon-grad-purple" aria-hidden="true">
+              <span class="material-symbols-rounded" aria-hidden="true">smart_toy</span>
+            </div>
+            <span class="section-pill">محصول اختصاصی</span>
+          </div>
+
+          <h2 class="section-title">
+            ربات تلگرامی <span class="animated-gradient-text">قاپیدن</span>
+          </h2>
+
+          <p class="section-lead">
+            سریع‌ترین راه برای دانلود ریلز و پست‌های اینستاگرام با کیفیت اصلی، مستقیم داخل تلگرام.
+            فقط لینک پست یا ریلز را برای ربات بفرستید تا فایل ویدیویی آماده را در چند ثانیه تحویل بگیرید.
+          </p>
+
+          <ul class="bot-highlights">
+            <li class="bot-highlight-item">
+              <span class="material-symbols-rounded" aria-hidden="true">check_circle</span>
+              <span>دانلود فوری ریلز و پست با کیفیت اصلی</span>
+            </li>
+            <li class="bot-highlight-item">
+              <span class="material-symbols-rounded" aria-hidden="true">check_circle</span>
+              <span>رابط سریع و هوشمند بدون نیاز به ثبت‌نام</span>
+            </li>
+          </ul>
+
+          <a
+            href="https://t.me/Ghapidan_bot"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary btn-pulse btn-bot-cta"
+            aria-label="باز کردن ربات قاپیدن در تلگرام"
+          >
+            <span class="material-symbols-rounded" aria-hidden="true">download</span>
+            <span>باز کردن ربات در تلگرام</span>
+          </a>
+        </div>
+
+        <!-- ستون کارت شیشه‌ای گفتگوی انیمیشنی تکرارشونده -->
+        <div class="bot-demo-wrap reveal" data-delay="2">
+          <div class="glass-card chat-card" id="botChatDemo" aria-label="پیش‌نمایش عملکرد ربات تلگرامی قاپیدن">
+            <div class="chat-card__header">
+              <div class="chat-avatar icon-grad-orange" aria-hidden="true">
+                <span class="material-symbols-rounded" aria-hidden="true">smart_toy</span>
+              </div>
+              <div class="chat-meta">
+                <strong class="chat-meta__name">ربات قاپیدن</strong>
+                <span class="chat-meta__id" dir="ltr">@Ghapidan_bot</span>
+              </div>
+              <span class="chat-online-badge">آنلاین</span>
+            </div>
+
+            <div class="chat-card__body">
+              <!-- پیام اول: ارسال لینک ریلز توسط کاربر -->
+              <div class="chat-msg chat-msg--user" id="chatStepUser">
+                <span class="chat-msg__sender">شما</span>
+                <p class="chat-msg__link" dir="ltr">https://instagram.com/reel/C9xK2pLmQ/</p>
+              </div>
+
+              <!-- مرحله دوم: سه‌نقطه در حال تایپ و پردازش -->
+              <div class="chat-typing" id="chatStepTyping" aria-hidden="true">
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+              </div>
+
+              <!-- مرحله سوم: پاسخ ویدیویی ربات همراه با پیام آماده شد -->
+              <div class="chat-msg chat-msg--bot" id="chatStepBot">
+                <a
+                  href="https://t.me/Ghapidan_bot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="reel-preview"
+                  aria-label="مشاهده و دانلود ریلز در ربات قاپیدن"
+                >
+                  <div class="reel-preview__art" aria-hidden="true">
+                    <div class="reel-wave reel-wave--one"></div>
+                    <div class="reel-wave reel-wave--two"></div>
+                    <div class="reel-play-btn">
+                      <span class="material-symbols-rounded" aria-hidden="true">play_arrow</span>
+                    </div>
+                    <span class="reel-badge" dir="ltr">HD • 00:24</span>
+                  </div>
+                </a>
+
+                <div class="chat-ready-row">
+                  <span class="material-symbols-rounded" aria-hidden="true">check_circle</span>
+                  <span class="chat-ready-text">آماده شد</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="chat-card__footer">
+              <span class="chat-input-mock">لینک ریلز یا پست اینستاگرام را بفرستید...</span>
+              <a
+                href="https://t.me/Ghapidan_bot"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="chat-send-btn icon-grad-blue"
+                aria-label="ورود مستقیم به ربات قاپیدن در تلگرام"
+              >
+                <span class="material-symbols-rounded" aria-hidden="true">send</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- بخش ۴: راه‌های تماس -->
+    <section id="contact" class="section-wrap">
+      <div class="contact-header reveal" data-delay="0">
+        <span class="section-pill">
+          <span class="material-symbols-rounded" aria-hidden="true">call</span>
+          <span>ارتباط مستقیم</span>
+        </span>
+        <h2 class="section-title">
+          بیا یه چیز <span class="animated-gradient-text">خفن بسازیم</span>
+        </h2>
+        <p class="section-lead">
+          برای سفارش طراحی سایت، توسعه فرانت‌اند یا مشاوره پروژه‌های خلاقانه، از هر مسیری که راحت‌ترید پیام بدهید.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- کارت تلگرام -->
+        <a
+          href="https://t.me/MRM_TK"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="glass-card contact-card reveal"
+          data-delay="1"
+          aria-label="ارتباط در تلگرام با شناسه MRM_TK"
+        >
+          <div class="icon-orb icon-grad-blue" aria-hidden="true">
+            <span class="material-symbols-rounded" aria-hidden="true">send</span>
+          </div>
+          <span class="contact-card__label">تلگرام</span>
+          <strong class="contact-card__value" dir="ltr">MRM_TK</strong>
+        </a>
+
+        <!-- کارت واتساپ -->
+        <a
+          href="https://wa.me/989056807986"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="glass-card contact-card reveal"
+          data-delay="2"
+          aria-label="گفتگو در واتساپ با شماره ۰۹۰۵۶۸۰۷۹۸۶"
+        >
+          <div class="icon-orb icon-grad-purple" aria-hidden="true">
+            <span class="material-symbols-rounded" aria-hidden="true">chat</span>
+          </div>
+          <span class="contact-card__label">واتساپ</span>
+          <strong class="contact-card__value">۰۹۰۵۶۸۰۷۹۸۶</strong>
+        </a>
+
+        <!-- کارت تماس تلفنی -->
+        <a
+          href="tel:+989056807986"
+          class="glass-card contact-card reveal"
+          data-delay="3"
+          aria-label="تماس تلفنی با شماره ۰۹۰۵۶۸۰۷۹۸۶"
+        >
+          <div class="icon-orb icon-grad-orange" aria-hidden="true">
+            <span class="material-symbols-rounded" aria-hidden="true">call</span>
+          </div>
+          <span class="contact-card__label">تماس تلفنی</span>
+          <strong class="contact-card__value">۰۹۰۵۶۸۰۷۹۸۶</strong>
+        </a>
+
+        <!-- کارت اینستاگرام -->
+        <a
+          href="https://instagram.com/MMDREZ.ME"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="glass-card contact-card reveal"
+          data-delay="4"
+          aria-label="مشاهده صفحه اینستاگرام MMDREZ.ME"
+        >
+          <div class="icon-orb icon-grad-coral-purple" aria-hidden="true">
+            <span class="material-symbols-rounded" aria-hidden="true">photo_camera</span>
+          </div>
+          <span class="contact-card__label">اینستاگرام</span>
+          <strong class="contact-card__value" dir="ltr">MMDREZ.ME</strong>
+        </a>
+      </div>
+
+      <!-- خط موقعیت مکانی و شرکت -->
+      <div class="location-line reveal" data-delay="2">
+        <span class="location-line__icon icon-grad-orange" aria-hidden="true">
+          <span class="material-symbols-rounded" aria-hidden="true">location_on</span>
+        </span>
+        <span class="location-line__text">ایران، مشهد مقدس · شرکت سلام گرافیک</span>
+      </div>
+    </section>
+  </main>
+
+  <!-- بخش ۵: فوتر ساده -->
+  <footer class="site-footer">
+    <div class="footer-inner glass-card">
+      <p class="footer-copy">
+        طراحی و توسعه توسط <strong>محمدرضا محمدی</strong> · شرکت سلام گرافیک
+      </p>
+      <a href="#hero" class="footer-top-link" aria-label="بازگشت به بالای صفحه">
+        <span>بازگشت به بالا</span>
+        <span class="material-symbols-rounded" aria-hidden="true">keyboard_arrow_down</span>
+      </a>
+    </div>
+  </footer>
+</body>
+</html>
